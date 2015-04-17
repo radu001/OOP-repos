@@ -266,7 +266,7 @@
                 <div class="row pb40">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="agent">
-                            <a href="profile.html" class="agent-avatar">
+                            <a href="profile.jsp" class="agent-avatar">
                                 <img src="images/avatar-1.png" alt="avatar">
                                 <div class="ring"></div>
                             </a>
@@ -285,7 +285,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="agent">
-                            <a href="profile.html" class="agent-avatar">
+                            <a href="profile.jsp" class="agent-avatar">
                                 <img src="images/avatar-2.png" alt="avatar">
                                 <div class="ring"></div>
                             </a>
@@ -304,7 +304,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="agent">
-                            <a href="profile.html" class="agent-avatar">
+                            <a href="profile.jsp" class="agent-avatar">
                                 <img src="images/avatar-3.png" alt="avatar">
                                 <div class="ring"></div>
                             </a>
@@ -323,7 +323,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="agent">
-                            <a href="profile.html" class="agent-avatar">
+                            <a href="profile.jsp" class="agent-avatar">
                                 <img src="images/avatar-4.png" alt="avatar">
                                 <div class="ring"></div>
                             </a>
@@ -378,7 +378,7 @@
                             <li><a href="#">About</a></li>
                             <li><a href="#">Jobs</a></li>
                             <li><a href="#">Press</a></li>
-                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="blog.jsp">Blog</a></li>
                             <li><a href="#">Help</a></li>
                             <li><a href="#">Policies</a></li>
                             <li><a href="#">Terms & Privacy</a></li>
