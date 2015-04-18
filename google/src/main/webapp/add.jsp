@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 <%@ page import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl" %>
 <%
 MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
 List<MarkersCategory> categories = null; %>
 
 
+=======
+>>>>>>> parent of 363b2e3... 8th
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -153,24 +156,35 @@ List<MarkersCategory> categories = null; %>
 							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <div class="btn-group">
                                     <label>Category</label>
-                        <select class="form-control"  style="padding:8px 14px;">
-  							<option selected disabled>Select...</option>
+                                    <div class="clearfix"></div>
+                                    <a href="#" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+                                        <span class="dropdown-label">Select...</span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-select">
+                                    <%@ page import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl" %>
                                     <%
+<<<<<<< HEAD
                                     System.out.println("wtf");
+=======
+                                    
+                                    MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
+                    				List<MarkersCategory> categories = null;
+>>>>>>> parent of 363b2e3... 8th
                     				categories = categoryDao.getAll();
                                     
                     				for(MarkersCategory cat : categories) {
                                     %>
-                                        <option value="<%= cat.getId()%>"><%= cat.getName()%></option>                                   
+                                        <li><input type="radio" name="ptype" value="<%= cat.getId()%>"><a href="#"><%= cat.getName()%></a></li>                                    
                                         
                                        <%} %>
-						</select>
+                                    </ul>
                                 </div>
                             </div>
-                            
-
                         </div>
+<<<<<<< HEAD
                                     
+=======
+>>>>>>> parent of 363b2e3... 8th
                         <div class="form-group">
                             <label>Description</label>
                             <textarea class="form-control" rows="4"></textarea>
