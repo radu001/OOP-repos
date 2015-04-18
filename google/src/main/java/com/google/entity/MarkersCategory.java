@@ -17,7 +17,6 @@ public class MarkersCategory extends BaseEntity {
 		this.publicMap = publicMap;
 
 		markers = new ArrayList<Marker>();
-		System.out.println("Map " + title + " created.");
 	}
 
 	public boolean addMarker(Marker marker) {

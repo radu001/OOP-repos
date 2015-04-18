@@ -102,23 +102,24 @@
 				
 				
                     <h1>List a New Category</h1>
-                    <form role="form" action="com.maps.AddServlet" method="post">
+                    <form role="form" action="AddServlet" method="post">
+                     <input type="hidden" name="requestType" value="addCategory"/>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div class="form-group">
                                     <label>Title</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="title">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <div class="form-group">
-                                    <label>Visibility</label><div class="checkbox custom-checkbox"><label>	<input type="checkbox"><span class="fa fa-check"></span>Public</label></div>	
+                                    <label>Visibility</label><div class="checkbox custom-checkbox"><label>	<input type="checkbox" name="visibility"><span class="fa fa-check"></span>Public</label></div>	
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea class="form-control" rows="4"></textarea>
+                            <textarea class="form-control" rows="4" name="description"></textarea>
                         </div>
 						
 						 <div class="form-group">
@@ -131,7 +132,8 @@
 					
 
 							
-                    <form role="form">
+                    <form role="form" action="AddServlet" method="post">
+                    <input type="hidden" name="requestType" value="addMarker"/>
 
 					<div class="row">
 					
@@ -147,10 +149,10 @@
                                     <label>Category</label>
                                     <div class="clearfix"></div>
                                     <a href="#" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
-                                        <span class="dropdown-label">For Sale</span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
+                                        <span class="dropdown-label">Select...</span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-select">
-                                        <li class="active"><input type="radio" name="ptype" checked="checked"><a href="#">For Sale</a></li>
+                                        <li><input type="radio" name="ptype"><a href="#">For Sale</a></li>
                                         <li><input type="radio" name="ptype"><a href="#">For Rent</a></li>
                                     </ul>
                                 </div>
