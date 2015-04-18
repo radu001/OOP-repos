@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ page import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl" %>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -147,27 +148,38 @@
 							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <div class="btn-group">
                                     <label>Category</label>
-                                    <div class="clearfix"></div>
-                                    <a href="#" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
-                                        <span class="dropdown-label">Select...</span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-select">
-                                    <%@ page import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl" %>
+                        <select class="form-control"  style="padding:8px 14px;">
+  							<option selected disabled>Select...</option>
                                     <%
-                                    
                                     MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
                     				List<MarkersCategory> categories = null;
                     				categories = categoryDao.getAll();
                                     
                     				for(MarkersCategory cat : categories) {
                                     %>
-                                        <li><input type="radio" name="ptype" value="<%= cat.getId()%>"><a href="#"><%= cat.getName()%></a></li>                                    
+                                        <option value="<%= cat.getId()%>"><%= cat.getName()%></option>                                   
                                         
                                        <%} %>
-                                    </ul>
+						</select>
                                 </div>
                             </div>
+                            
+
                         </div>
+
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                         <div class="form-group">
                             <label>Description</label>
                             <textarea class="form-control" rows="4"></textarea>
