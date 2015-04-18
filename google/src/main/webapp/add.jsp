@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <%@ page import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl" %>
+<%
+MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
+List<MarkersCategory> categories = null; %>
+
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -151,8 +156,7 @@
                         <select class="form-control"  style="padding:8px 14px;">
   							<option selected disabled>Select...</option>
                                     <%
-                                    MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
-                    				List<MarkersCategory> categories = null;
+                                    System.out.println("wtf");
                     				categories = categoryDao.getAll();
                                     
                     				for(MarkersCategory cat : categories) {
@@ -166,19 +170,6 @@
                             
 
                         </div>
-
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
                                     
                         <div class="form-group">
                             <label>Description</label>
@@ -196,14 +187,14 @@
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label>Longitude</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" id="latitude">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label>Web Site</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text">
+                                        <input class="form-control" type="text" id="longitude">
                                     </div>
                                 </div>
                             </div>
@@ -247,10 +238,8 @@
         <script src="js/jquery.visible.js"></script>
         <script src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=geometry&amp;libraries=places" type="text/javascript"></script>
         <script src="js/infobox.js"></script>
-        <script src="js/clndr.js"></script>
         <script src="js/jquery.tagsinput.min.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
-        <script src="js/fileinput.min.js"></script>
-        <script src="js/app.js"></script>
+        <script src="js/addMarker.js"></script>
     </body>
 </html>
