@@ -152,8 +152,18 @@
                                         <span class="dropdown-label">Select...</span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-select">
-                                        <li><input type="radio" name="ptype"><a href="#">For Sale</a></li>
-                                        <li><input type="radio" name="ptype"><a href="#">For Rent</a></li>
+                                    <%@ page import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl" %>
+                                    <%
+                                    
+                                    MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
+                    				List<MarkersCategory> categories = null;
+                    				categories = categoryDao.getAll();
+                                    
+                    				for(MarkersCategory cat : categories) {
+                                    %>
+                                        <li><input type="radio" name="ptype" value="<%= cat.getId()%>"><a href="#"><%= cat.getName()%></a></li>                                    
+                                        
+                                       <%} %>
                                     </ul>
                                 </div>
                             </div>
