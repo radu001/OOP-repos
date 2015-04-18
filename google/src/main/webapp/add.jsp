@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <<<<<<< HEAD
+<<<<<<< HEAD
 <%@ page import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl" %>
 <%
 MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
 List<MarkersCategory> categories = null; %>
 
 
+=======
+>>>>>>> parent of 363b2e3... 8th
 =======
 >>>>>>> parent of 363b2e3... 8th
     <head>
@@ -164,8 +167,11 @@ List<MarkersCategory> categories = null; %>
                                     <%@ page import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl" %>
                                     <%
 <<<<<<< HEAD
+<<<<<<< HEAD
                                     System.out.println("wtf");
 =======
+=======
+>>>>>>> parent of 363b2e3... 8th
                                     
                                     MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
                     				List<MarkersCategory> categories = null;
@@ -182,7 +188,10 @@ List<MarkersCategory> categories = null; %>
                             </div>
                         </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                                     
+=======
+>>>>>>> parent of 363b2e3... 8th
 =======
 >>>>>>> parent of 363b2e3... 8th
                         <div class="form-group">
