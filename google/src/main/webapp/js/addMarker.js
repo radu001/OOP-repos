@@ -70,10 +70,8 @@
     });
 
     google.maps.event.addListener(newMarker, "mouseup", function(event) {
-        var latitude = this.position.lat();
-        var longitude = this.position.lng();
-        $('#latitude').text(this.position.lat());
-        $('#longitude').text(this.position.lng());
+        $('#latitude').val(this.position.lat());
+        $('#longitude').val(this.position.lng());
     });
 
     

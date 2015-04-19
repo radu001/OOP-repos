@@ -46,6 +46,7 @@ public class MarkersCategoryDaoImpl implements GenericDao<MarkersCategory, Seria
 					+ e.getMessage());
 			throw new DaoException(e);
 		} finally {
+			
 			connectionPool.returnConnectionToPool(connection);
 		}
 		

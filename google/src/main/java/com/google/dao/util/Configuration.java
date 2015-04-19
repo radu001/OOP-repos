@@ -27,7 +27,7 @@ public class Configuration {
 		DB_PASSWORD = "qwerty";
 		DB_URL = "jdbc:mysql://localhost:3306/mydatabase";
 		DB_DRIVER = "com.mysql.jdbc.Driver";
-		DB_MAX_CONNECTIONS = 50;
+		DB_MAX_CONNECTIONS = 5;
 
 	}
 

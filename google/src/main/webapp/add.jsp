@@ -1,20 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 <%@ page import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl" %>
 <%
 MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
 List<MarkersCategory> categories = null; %>
 
-
-=======
->>>>>>> parent of 363b2e3... 8th
-=======
->>>>>>> parent of 363b2e3... 8th
-=======
->>>>>>> parent of 363b2e3... 8th
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -169,19 +159,7 @@ List<MarkersCategory> categories = null; %>
                                     <ul class="dropdown-menu dropdown-select">
                                     <%@ page import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl" %>
                                     <%
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                     System.out.println("wtf");
-=======
-=======
->>>>>>> parent of 363b2e3... 8th
-=======
->>>>>>> parent of 363b2e3... 8th
-                                    
-                                    MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
-                    				List<MarkersCategory> categories = null;
->>>>>>> parent of 363b2e3... 8th
                     				categories = categoryDao.getAll();
                                     
                     				for(MarkersCategory cat : categories) {
@@ -193,16 +171,7 @@ List<MarkersCategory> categories = null; %>
                                 </div>
                             </div>
                         </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                    
-=======
->>>>>>> parent of 363b2e3... 8th
-=======
->>>>>>> parent of 363b2e3... 8th
-=======
->>>>>>> parent of 363b2e3... 8th
+
                         <div class="form-group">
                             <label>Description</label>
                             <textarea class="form-control" rows="4"></textarea>
@@ -213,20 +182,20 @@ List<MarkersCategory> categories = null; %>
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label>Latitude</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" id="latitude">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label>Longitude</label>
-                                    <input type="text" class="form-control" id="latitude">
+                                    <input type="text" class="form-control" id="longitude">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label>Web Site</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="longitude">
+                                        <input class="form-control" type="text">
                                     </div>
                                 </div>
                             </div>
