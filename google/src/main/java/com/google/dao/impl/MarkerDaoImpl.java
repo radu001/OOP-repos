@@ -29,7 +29,7 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 
 			PreparedStatement preparedStatement = null;
 			String insertSQL = "INSERT INTO marker"
-					+ "(name,description, siteUrl, iconUrl, site, latitude, longitude, route, fk_category) VALUES"
+					+ "(name,description, imageUrl, iconUrl, site, latitude, longitude, route, fk_category) VALUES"
 					+ "(?,?,?,?,?,?,?,?,?)";
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, object.getName());
