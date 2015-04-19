@@ -1,6 +1,100 @@
+    var newMarker = null;
+    var clickListener;
+    var map;
+    var poly;
+    var path;
+    
+    function putMarker() {
+    	
+    	clickListener = google.maps.event.addListener(map, 'click',function(event) {
+    		   placeMarker(event.latLng);
+
+    });
+    	
+    	 document.getElementById("putMarkerBtn").disabled = true; 
+    	 
+    }
+
+    function placeMarker(location) {
+    	  newMarker = new google.maps.Marker({
+    	        position: location,
+    	        map: map,
+    	        icon: new google.maps.MarkerImage( 
+    	            'images/marker-new.png',
+    	            null,
+    	            null,
+    	            null,
+    	            new google.maps.Size(36, 36)
+    	        ),
+    	        draggable: true,
+    	        animation: google.maps.Animation.DROP,
+    	    });
+    	 
+    	  $('#latitude').val(location.lat());
+	      $('#longitude').val(location.lng());
+    	  google.maps.event.removeListener(clickListener);
+    	  
+    	    google.maps.event.addListener(newMarker, "mouseup", function(event) {
+    	        $('#latitude').val(this.position.lat());
+    	        $('#longitude').val(this.position.lng());
+    	    });
+    	    
+        	document.getElementById("startRouteBtn").disabled = false; 
+
+    	    
+    	   
+    }
+    
+    
+    function startRoute() {
+    	document.getElementById("startRouteBtn").disabled = true; 
+    	
+    	map.setOptions({
+    		draggableCursor: 'crosshair'
+    		}); 
+    	
+    	var polyOptions = {
+    		    strokeColor: '#000000',
+    		    strokeOpacity: 1.0,
+    		    strokeWeight: 3
+    		  };
+    		  poly = new google.maps.Polyline(polyOptions);
+    		  poly.setMap(map);
+
+    		  path = poly.getPath();
+        	  path.push(newMarker.getPosition());
+        	  
+        	  
+        	  $('#routeString').val(path.getArray().toString());
+    		  // Add a listener for the click event
+    		  clickListener = google.maps.event.addListener(map, 'click', addLatLng);
+    }
+    
+    function addLatLng(event) {
+    	  path = poly.getPath();
+    	  path.push(event.latLng);
+    	  $('#routeString').val(path.getArray().toString());
+    	}
+    
+    
+    function clearRoute() {
+    	document.getElementById("startRouteBtn").disabled = false; 
+    	if(path != null)
+    	path.clear();
+    	google.maps.event.removeListener(clickListener);
+    	map.setOptions({
+    		draggableCursor: 'default'
+    		}); 
+    	$('#routeString').val("");
+    }
+    
+    
 (function($) {
     "use strict";
 
+	document.getElementById("startRouteBtn").disabled = true; 
+
+	
     // Custom options for map
     var options = {
             zoom : 14,
@@ -38,10 +132,7 @@
         }]
     }];
 
-    var newMarker = null;
-    var markers = [];
 
-    var map;
     
     map = new google.maps.Map(document.getElementById('mapView'), options);
     var styledMapType = new google.maps.StyledMapType(styles, {
@@ -52,27 +143,9 @@
     map.setCenter(new google.maps.LatLng(40.6984237,-73.9890044));
     map.setZoom(14);
 
-    
 
-    newMarker = new google.maps.Marker({
-        position: new google.maps.LatLng(40.6984237,-73.9890044),
-        map: map,
-        icon: new google.maps.MarkerImage( 
-            'images/marker-new.png',
-            null,
-            null,
-            // new google.maps.Point(0,0),
-            null,
-            new google.maps.Size(36, 36)
-        ),
-        draggable: true,
-        animation: google.maps.Animation.DROP,
-    });
 
-    google.maps.event.addListener(newMarker, "mouseup", function(event) {
-        $('#latitude').val(this.position.lat());
-        $('#longitude').val(this.position.lng());
-    });
+
 
     
         
@@ -476,3 +549,5 @@
     $('input, textarea').placeholder();
 
 })(jQuery);
+
+

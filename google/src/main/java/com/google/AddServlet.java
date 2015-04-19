@@ -19,7 +19,7 @@ public class AddServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		
-		String title, description;
+		String title = "", description = "";
 		boolean visibility = false;
 		String requestType = req.getParameter("requestType");
 		
@@ -50,7 +50,28 @@ public class AddServlet extends HttpServlet {
 			
 			
 		case "addMarker":
+			title = req.getParameter("title");
+			description = req.getParameter("description");
+			String category = req.getParameter("ptype");
+			String latitude = req.getParameter("latitude");
+			String longitude = req.getParameter("longitude");
+			String route = req.getParameter("route");
+			String site = req.getParameter("webSite");
+			String iconUrl = req.getParameter("iconUrl");
+			String imageUrl = req.getParameter("imageUrl");
 			
+			
+			
+			
+			System.out.println(title);
+			System.out.println(description);
+			System.out.println(category);
+			System.out.println(latitude);
+			System.out.println(longitude);
+			System.out.println(route);
+			System.out.println(site);
+			System.out.println(iconUrl);
+			System.out.println(imageUrl);
 			break;
 	}
 		
