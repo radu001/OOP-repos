@@ -29,17 +29,18 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 
 			PreparedStatement preparedStatement = null;
 			String insertSQL = "INSERT INTO marker"
-					+ "(name,description, iconUrl, site, latitude, longitude, route, fk_category) VALUES"
-					+ "(?,?,?,?,?,?,?,?)";
+					+ "(name,description, siteUrl, iconUrl, site, latitude, longitude, route, fk_category) VALUES"
+					+ "(?,?,?,?,?,?,?,?,?)";
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, object.getName());
 			preparedStatement.setString(2, object.getDescription());
-			preparedStatement.setString(3, object.getIconUrl());
-			preparedStatement.setString(4, object.getSite());
-			preparedStatement.setDouble(5, object.getLatitude());
-			preparedStatement.setDouble(6, object.getLongitude());
-			preparedStatement.setString(7, object.getRoute().getJSONString());
-			preparedStatement.setFloat(8, object.getFk_category());
+			preparedStatement.setString(3, object.getImageUrl());
+			preparedStatement.setString(4, object.getIconUrl());
+			preparedStatement.setString(5, object.getSite());
+			preparedStatement.setDouble(6, object.getLatitude());
+			preparedStatement.setDouble(7, object.getLongitude());
+			preparedStatement.setString(8, object.getRouteStr());
+			preparedStatement.setFloat(9, object.getFk_category());
 			
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
@@ -67,10 +68,10 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 			// Extact result from ResultSet rs
 			while (rs.next()) {
 				marker = new Marker(rs.getInt("idMarker"),
-						rs.getString("name"), rs.getString("description"),
+						rs.getString("name"), rs.getString("description"),rs.getString("imageUrl"),
 						rs.getString("iconUrl"), rs.getString("site"),
 						rs.getDouble("latitude"), rs.getDouble("longitude"), 
-						new Route(rs.getString("route")), rs.getInt("fk_category"));
+						rs.getString("route"), rs.getInt("fk_category"));
 			}
 			// close ResultSet rs
 			rs.close();
@@ -96,17 +97,18 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 		Connection connection = connectionPool.getConnectionFromPool();
 		PreparedStatement preparedStatement = null;
 		try {
-			String query = "update marker set name = ?,description = ?, iconUrl = ?, site = ?, latitude = ?, longitude = ?, route = ?, fk_category = ? where idMarker = ?";
+			String query = "update marker set name = ?,description = ?, imageUrl = ?, iconUrl = ?, site = ?, latitude = ?, longitude = ?, route = ?, fk_category = ? where idMarker = ?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, object.getName());
 			preparedStatement.setString(2, object.getDescription());
-			preparedStatement.setString(3, object.getIconUrl());
-			preparedStatement.setString(4, object.getSite());
-			preparedStatement.setDouble(5, object.getLatitude());
-			preparedStatement.setDouble(6, object.getLongitude());
-			preparedStatement.setString(7, object.getRoute().getJSONString());
-			preparedStatement.setFloat(8, object.getFk_category());
-			preparedStatement.setInt(9, object.getId());
+			preparedStatement.setString(3, object.getImageUrl());
+			preparedStatement.setString(4, object.getIconUrl());
+			preparedStatement.setString(5, object.getSite());
+			preparedStatement.setDouble(6, object.getLatitude());
+			preparedStatement.setDouble(7, object.getLongitude());
+			preparedStatement.setString(8, object.getRouteStr());
+			preparedStatement.setFloat(9, object.getFk_category());
+			preparedStatement.setInt(10, object.getId());
 
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
@@ -158,10 +160,10 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 			// Extact result from ResultSet rs
 			while (rs.next()) {
 				marker = new Marker(rs.getInt("idMarker"),
-						rs.getString("name"), rs.getString("description"),
+						rs.getString("name"), rs.getString("description"),rs.getString("imageUrl"),
 						rs.getString("iconUrl"), rs.getString("site"),
 						rs.getDouble("latitude"), rs.getDouble("longitude"), 
-						new Route(rs.getString("route")), rs.getInt("fk_category"));
+						rs.getString("route"), rs.getInt("fk_category"));
 				markers.add(marker);
 			}
 			// close ResultSet rs
@@ -223,10 +225,10 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 			// Extact result from ResultSet rs
 			while (rs.next()) {
 				marker = new Marker(rs.getInt("idMarker"),
-						rs.getString("name"), rs.getString("description"),
+						rs.getString("name"), rs.getString("description"),rs.getString("imageUrl"),
 						rs.getString("iconUrl"), rs.getString("site"),
 						rs.getFloat("latitude"), rs.getFloat("longitude"),
-						new Route(rs.getString("route")), rs.getInt("fk_category"));
+						rs.getString("route"), rs.getInt("fk_category"));
 				markers.add(marker);
 			}
 			// close ResultSet rs
