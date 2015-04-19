@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.dao.impl.MarkerDaoImpl;
 import com.google.dao.impl.MarkersCategoryDaoImpl;
+import com.google.entity.Marker;
 import com.google.entity.MarkersCategory;
 import com.google.exception.DaoException;
 
@@ -60,7 +62,16 @@ public class AddServlet extends HttpServlet {
 			String iconUrl = req.getParameter("iconUrl");
 			String imageUrl = req.getParameter("imageUrl");
 			
+			Marker m = new Marker(0, title,description,imageUrl, iconUrl, site,  Double.parseDouble(latitude), Double.parseDouble(longitude),
+					route,Integer.parseInt(category));
 			
+			MarkerDaoImpl markerDao = new MarkerDaoImpl();
+			try {
+				markerDao.insert(m);
+			} catch (DaoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			
 			System.out.println(title);
