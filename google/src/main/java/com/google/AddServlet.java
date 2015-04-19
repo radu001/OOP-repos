@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.dao.impl.MarkerDaoImpl;
 import com.google.dao.impl.MarkersCategoryDaoImpl;
@@ -24,6 +25,7 @@ public class AddServlet extends HttpServlet {
 		String title = "", description = "";
 		boolean visibility = false;
 		String requestType = req.getParameter("requestType");
+		HttpSession session=req.getSession();  
 		
 		switch(requestType) {
 		case "addCategory":
@@ -47,11 +49,13 @@ public class AddServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+			session.setAttribute("result","succes");
 			resp.sendRedirect("add.jsp");
 			break;
 			
 			
 		case "addMarker":
+			
 			title = req.getParameter("title");
 			description = req.getParameter("description");
 			String category = req.getParameter("ptype");
@@ -61,6 +65,7 @@ public class AddServlet extends HttpServlet {
 			String site = req.getParameter("webSite");
 			String iconUrl = req.getParameter("iconUrl");
 			String imageUrl = req.getParameter("imageUrl");
+
 			
 			Marker m = new Marker(0, title,description,imageUrl, iconUrl, site,  Double.parseDouble(latitude), Double.parseDouble(longitude),
 					route,Integer.parseInt(category));
@@ -73,7 +78,7 @@ public class AddServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			
+			/*
 			System.out.println(title);
 			System.out.println(description);
 			System.out.println(category);
@@ -83,6 +88,11 @@ public class AddServlet extends HttpServlet {
 			System.out.println(site);
 			System.out.println(iconUrl);
 			System.out.println(imageUrl);
+			*/
+			
+			
+			session.setAttribute("result","succes");
+			resp.sendRedirect("add.jsp");
 			break;
 	}
 		
