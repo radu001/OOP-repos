@@ -5,6 +5,9 @@
 <%
 	MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
 	List<MarkersCategory> categories = null;
+	
+    
+	
 %>
 
 <head>
@@ -118,9 +121,23 @@
 		<div id="content" class="mob-max">
 			<div class="rightContainer">
 
+					
+					<%
+					
+					String strExpired = (String) session.getAttribute("result");
+					session.removeAttribute("result");
+					if(strExpired != null) {
+						System.out.println(strExpired);
+					if (strExpired.equals("succes")){
+						%><font color="green" size="5"> * Data successfully inserted!</font> <BR> <BR><%
+					}
+					}  
+					
+					%>
+
 
 				<h1>List a New Category</h1>
-				<form role="form" action="AddServlet" method="post">
+				<form role="form" action="AddServlet" method="post" onsubmit="return validateCategoryForm()" name="categoryForm">
 					<input type="hidden" name="requestType" value="addCategory" />
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -156,7 +173,7 @@
 
 
 
-				<form role="form" action="AddServlet" method="post">
+				<form role="form" action="AddServlet" method="post" onsubmit="return validateMarkerForm()" name="markerForm">
 					<input type="hidden" name="requestType" value="addMarker" />
 
 					<div class="row">
@@ -266,6 +283,8 @@
 						<label>Icon Url</label> <input type="text" class="form-control" name="iconUrl">
 					</div>
 
+					
+						
 
 					<div class="form-group">
 						<input type="submit" class="btn btn-green btn-lg"

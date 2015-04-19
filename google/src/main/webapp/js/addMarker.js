@@ -4,6 +4,69 @@
     var poly;
     var path;
     
+    function validateCategoryForm() {
+    	var str = "";
+        var title = document.forms["categoryForm"]["title"].value;
+        var description = document.forms["categoryForm"]["description"].value;
+        console.log(title);
+        console.log(description);
+        
+        if (title == null || title == "") {
+        	str = str.concat("Title empty \n");
+        }
+        if (description == null || description == "") {
+        	str = str.concat("Description empty");
+        }
+               
+        if (str != "") {
+            alert(str);
+            return false;
+        }
+    }
+    
+    
+    function validateMarkerForm() {
+    	var str = "";
+        var title = document.forms["markerForm"]["title"].value;
+        var description = document.forms["markerForm"]["description"].value;
+        var category =  document.forms["markerForm"]["ptype"].value;
+        var latitude =  document.forms["markerForm"]["latitude"].value;
+        var longitude =  document.forms["markerForm"]["longitude"].value;
+        var webSite =  document.forms["markerForm"]["webSite"].value;
+        var route =  document.forms["markerForm"]["route"].value;
+        var imageUrl =  document.forms["markerForm"]["imageUrl"].value;
+        var iconUrl =  document.forms["markerForm"]["iconUrl"].value;
+        
+        if (title == null || title == "")
+        	str = str.concat("Title empty \n");
+        
+        if (description == null || description == "")
+        	str = str.concat("Description empty \n");
+        
+        if (category == null || category == "")
+        	str = str.concat("Category not selected \n");
+        
+        if (latitude == null || latitude == "" || longitude == null || longitude == "")
+        	str = str.concat("Marker not positioned \n");
+        
+        if (webSite == null || webSite == "")
+        	str = str.concat("Web site empty \n");
+        
+        if (route == null || route == "")
+        	str = str.concat("Route not set \n");
+               
+        if (imageUrl == null || imageUrl == "")
+        	str = str.concat("Image url empty \n");
+        
+        if (iconUrl == null || iconUrl == "")
+        	str = str.concat("Icon url empty \n");
+        
+        if (str != "") {
+            alert(str);
+            return false;
+        }
+    }
+    
     function putMarker() {
     	
     	clickListener = google.maps.event.addListener(map, 'click',function(event) {
