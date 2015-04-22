@@ -12,10 +12,20 @@
         <servlet-name>AddServlet</servlet-name>
         <servlet-class>com.google.AddServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>GetMarkersServlet</servlet-name>
+        <servlet-class>com.google.GetMarkersServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>AddServlet</servlet-name>
         <url-pattern>/AddServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>GetMarkersServlet</servlet-name>
+        <url-pattern>/GetMarkersServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

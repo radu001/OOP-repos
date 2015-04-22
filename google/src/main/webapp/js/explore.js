@@ -8,7 +8,32 @@
     function changeMap(element) {
     	console.log(element);
     	
+    	var jsonReq = { data: [] };
+
+        jsonReq.data.push({ 
+            "request" : 'getMarkers',
+            "id" : element
+        });
+        
+    	var a = $.ajax({
+            url : 'GetMarkersServlet',
+            type: "POST",
+            dataType : 'json',
+            data : JSON.stringify(jsonReq),
+            success : function(data) {
+                console.log("sucessfull sending:")
+               var json = data;
+                $.each(json.Categories, function(key, val) {
+                	
+            });
+                
+            },
+            error : function() {
+                console.log('failed');
+            }
+        });
     	
+    
     }
     
     
