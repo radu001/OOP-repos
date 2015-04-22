@@ -194,8 +194,6 @@
 									class="caret"></span>
 								</a>
 								<ul class="dropdown-menu dropdown-select">
-									<%@ page
-										import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl"%>
 									<%
 										categories = categoryDao.getAll();
 
