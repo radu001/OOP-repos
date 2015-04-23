@@ -7,6 +7,14 @@
     var markers = [];
     
     
+    function focusMarker(markerId) {
+    	markers.forEach(function(marker) {
+    	    if(markerId == marker.get('store_id'))
+    	    	map.setCenter(marker.getPosition());
+    	});
+    }
+    
+    
     function changeMap(element) {
     	console.log(element);
     	
@@ -27,7 +35,9 @@
                var json = data;
                 	
                 	console.log(json.Markers);
+                	deleteMarkers();
                 	putMarkers(json.Markers);
+                	jQuery('#resultList').load(' #resultList');
 
                 
             },
@@ -64,6 +74,7 @@
             var markerVar = new google.maps.Marker({
                 position: latlng,
                 title : marker.Name,
+                store_id: marker.Id,
                 map: map,
                 icon: new google.maps.MarkerImage( 
                     'images/marker-green.png',
@@ -108,168 +119,25 @@
                 infobox.open(null,null);
             });
 
+           // markerVar.set('id', marker.Id);
             markers.push(markerVar);
             console.log("marker put");
         });
     }
-    
-    
-    
-    
-    
-    
-    function validateCategoryForm() {
-    	var str = "";
-        var title = document.forms["categoryForm"]["title"].value;
-        var description = document.forms["categoryForm"]["description"].value;
-        console.log(title);
-        console.log(description);
-        
-        if (title == null || title == "") {
-        	str = str.concat("Title empty \n");
-        }
-        if (description == null || description == "") {
-        	str = str.concat("Description empty");
-        }
-               
-        if (str != "") {
-            alert(str);
-            return false;
-        }
-    }
-    
-    
-    function validateMarkerForm() {
-    	var str = "";
-        var title = document.forms["markerForm"]["title"].value;
-        var description = document.forms["markerForm"]["description"].value;
-        var category =  document.forms["markerForm"]["ptype"].value;
-        var latitude =  document.forms["markerForm"]["latitude"].value;
-        var longitude =  document.forms["markerForm"]["longitude"].value;
-        var webSite =  document.forms["markerForm"]["webSite"].value;
-        var route =  document.forms["markerForm"]["route"].value;
-        var imageUrl =  document.forms["markerForm"]["imageUrl"].value;
-        var iconUrl =  document.forms["markerForm"]["iconUrl"].value;
-        
-        if (title == null || title == "")
-        	str = str.concat("Title empty \n");
-        
-        if (description == null || description == "")
-        	str = str.concat("Description empty \n");
-        
-        if (category == null || category == "")
-        	str = str.concat("Category not selected \n");
-        
-        if (latitude == null || latitude == "" || longitude == null || longitude == "")
-        	str = str.concat("Marker not positioned \n");
-        
-        if (webSite == null || webSite == "")
-        	str = str.concat("Web site empty \n");
-        
-        if (route == null || route == "")
-        	str = str.concat("Route not set \n");
-               
-        if (imageUrl == null || imageUrl == "")
-        	str = str.concat("Image url empty \n");
-        
-        if (iconUrl == null || iconUrl == "")
-        	str = str.concat("Icon url empty \n");
-        
-        if (str != "") {
-            alert(str);
-            return false;
-        }
-    }
-    
-    function putMarker() {
-    	
-    	clickListener = google.maps.event.addListener(map, 'click',function(event) {
-    		   placeMarker(event.latLng);
 
-    });
-    	
-    	 document.getElementById("putMarkerBtn").disabled = true; 
-    	 
-    }
-
-    function placeMarker(location) {
-    	  newMarker = new google.maps.Marker({
-    	        position: location,
-    	        map: map,
-    	        icon: new google.maps.MarkerImage( 
-    	            'images/marker-new.png',
-    	            null,
-    	            null,
-    	            null,
-    	            new google.maps.Size(36, 36)
-    	        ),
-    	        draggable: true,
-    	        animation: google.maps.Animation.DROP,
-    	    });
-    	 
-    	  $('#latitude').val(location.lat());
-	      $('#longitude').val(location.lng());
-    	  google.maps.event.removeListener(clickListener);
-    	  
-    	    google.maps.event.addListener(newMarker, "mouseup", function(event) {
-    	        $('#latitude').val(this.position.lat());
-    	        $('#longitude').val(this.position.lng());
-    	    });
-    	    
-        	document.getElementById("startRouteBtn").disabled = false; 
-
-    	    
-    	   
-    }
-    
-    
-    function startRoute() {
-    	document.getElementById("startRouteBtn").disabled = true; 
-    	
-    	map.setOptions({
-    		draggableCursor: 'crosshair'
-    		}); 
-    	
-    	var polyOptions = {
-    		    strokeColor: '#000000',
-    		    strokeOpacity: 1.0,
-    		    strokeWeight: 3
-    		  };
-    		  poly = new google.maps.Polyline(polyOptions);
-    		  poly.setMap(map);
-
-    		  path = poly.getPath();
-        	  path.push(newMarker.getPosition());
-        	  
-        	  
-        	  $('#routeString').val(path.getArray().toString());
-    		  // Add a listener for the click event
-    		  clickListener = google.maps.event.addListener(map, 'click', addLatLng);
-    }
-    
-    function addLatLng(event) {
-    	  path = poly.getPath();
-    	  path.push(event.latLng);
-    	  $('#routeString').val(path.getArray().toString());
-    	}
-    
-    
-    function clearRoute() {
-    	document.getElementById("startRouteBtn").disabled = false; 
-    	if(path != null)
-    	path.clear();
-    	google.maps.event.removeListener(clickListener);
-    	map.setOptions({
-    		draggableCursor: 'default'
-    		}); 
-    	$('#routeString').val("");
+    // Deletes all markers in the array.
+    function deleteMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+          }
+      markers = [];
     }
     
     
 (function($) {
     "use strict";
 
-	
+    
     // Custom options for map
     var options = {
             zoom : 14,
@@ -319,7 +187,7 @@
     map.setZoom(14);
 
 
-    
+    changeMap("-1");
         
         
     var windowHeight;

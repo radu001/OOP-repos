@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +24,7 @@ public class GetMarkersServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+		HttpSession session=req.getSession(); 
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				req.getInputStream()));
 		String json = "";
@@ -80,6 +82,7 @@ public class GetMarkersServlet extends HttpServlet {
 				}
 
 				jsonResp2.put("Markers", markersJson);
+				session.setAttribute("markers", markers);
 
 				resp.setContentType("application/json");
 				resp.getWriter().write(jsonResp2.toString());
