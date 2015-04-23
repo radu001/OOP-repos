@@ -7,6 +7,30 @@
     var markers = [];
     
     
+    function setRoute(marker) {
+    	
+    	var regex = new RegExp('(', 'g');
+    	var route = route.replace(regex, ']');
+    	regex = new RegExp(')', 'g');
+    	route = route.replace(regex, ']');
+
+    	route = '[' + route + ']';
+    	
+    	console.log(route);
+    	
+    	var polyOptions = {
+    		    strokeColor: '#000000',
+    		    strokeOpacity: 1.0,
+    		    strokeWeight: 3
+    		  };
+    		  poly = new google.maps.Polyline(polyOptions);
+    		  poly.setMap(map);
+    	  	  //poly.setPath(marker.get('route'));
+        	 //console.log(marker.get('route'));
+ 
+    }
+    
+    
     function focusMarker(markerId) {
     	markers.forEach(function(marker) {
     	    if(markerId == marker.get('store_id'))
@@ -75,6 +99,7 @@
                 position: latlng,
                 title : marker.Name,
                 store_id: marker.Id,
+                route : marker.Route,
                 map: map,
                 icon: new google.maps.MarkerImage( 
                     'images/marker-green.png',
@@ -119,6 +144,9 @@
                 infobox.open(null,null);
             });
 
+            google.maps.event.addListener(markerVar, 'mouseover', function() {
+                setRoute(markerVar);
+              });
            // markerVar.set('id', marker.Id);
             markers.push(markerVar);
             console.log("marker put");
