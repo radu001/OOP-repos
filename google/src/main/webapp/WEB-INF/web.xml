@@ -4,9 +4,6 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  
- 
-    
 
 	<servlet>
         <servlet-name>AddServlet</servlet-name>
@@ -18,14 +15,24 @@
         <servlet-class>com.google.GetMarkersServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ExploreServlet</servlet-name>
+        <servlet-class>com.google.ExploreServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>AddServlet</servlet-name>
-        <url-pattern>/AddServlet</url-pattern>
+        <url-pattern>/add.jsp</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>GetMarkersServlet</servlet-name>
         <url-pattern>/GetMarkersServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ExploreServlet</servlet-name>
+        <url-pattern>/explore.jsp</url-pattern>
     </servlet-mapping>
 
 </web-app>

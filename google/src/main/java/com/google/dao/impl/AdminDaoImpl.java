@@ -4,9 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.google.Admin;
 import com.google.dao.AdminDao;
 import com.google.dao.util.JdbcConnectionPool;
+import com.google.entity.Admin;
 import com.google.exception.DaoException;
 import com.mysql.jdbc.Connection;
 

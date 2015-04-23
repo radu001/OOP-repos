@@ -1,6 +1,7 @@
 package com.google;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,9 @@ import com.google.exception.DaoException;
 
 public class AddServlet extends HttpServlet {
 
+	MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
+	List<MarkersCategory> categories = null;
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -98,6 +102,24 @@ public class AddServlet extends HttpServlet {
 		
 	}
 
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	HttpSession session=req.getSession();  
+		
+		try {
+			categories = categoryDao.getAll();
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		session.setAttribute("categories", categories);
+		System.out.println("hello");
+		req.getRequestDispatcher("/WEB-INF/add.jsp").forward(req, resp);
+	}
+	
 	
 	
 }

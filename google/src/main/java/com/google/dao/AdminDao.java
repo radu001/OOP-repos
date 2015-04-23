@@ -1,6 +1,6 @@
 package com.google.dao;
 
-import com.google.Admin;
+import com.google.entity.Admin;
 import com.google.exception.DaoException;
 
 public interface AdminDao {

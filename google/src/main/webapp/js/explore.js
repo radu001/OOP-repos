@@ -3,6 +3,8 @@
     var map;
     var poly;
     var path;
+    var newMarker = null;
+    var markers = [];
     
     
     function changeMap(element) {
@@ -12,7 +14,7 @@
 
         jsonReq.data.push({ 
             "request" : 'getMarkers',
-            "id" : element
+            "categoryId" : element
         });
         
     	var a = $.ajax({
@@ -23,9 +25,10 @@
             success : function(data) {
                 console.log("sucessfull sending:")
                var json = data;
-                $.each(json.Categories, function(key, val) {
                 	
-            });
+                	console.log(json.Markers);
+                	putMarkers(json.Markers);
+
                 
             },
             error : function() {
@@ -35,6 +38,84 @@
     	
     
     }
+    
+    // custom infowindow object
+    var infobox = new InfoBox({
+        disableAutoPan: false,
+        maxWidth: 202,
+        pixelOffset: new google.maps.Size(-101, -285),
+        zIndex: null,
+        boxStyle: {
+            background: "url('images/infobox-bg.png') no-repeat",
+            opacity: 1,
+            width: "202px",
+            height: "245px"
+        },
+        closeBoxMargin: "28px 26px 0px 0px",
+        closeBoxURL: "",
+        infoBoxClearance: new google.maps.Size(1, 1),
+        pane: "floatPane",
+        enableEventPropagation: false
+    });
+    
+    function putMarkers(markersArray) {
+        $.each(markersArray, function(i,marker) {
+            var latlng = new google.maps.LatLng(marker.Latitude,marker.Longitude);
+            var markerVar = new google.maps.Marker({
+                position: latlng,
+                title : marker.Name,
+                map: map,
+                icon: new google.maps.MarkerImage( 
+                    'images/marker-green.png',
+                    null,
+                    null,
+                    null,
+                    new google.maps.Size(36, 36)
+                ),
+                draggable: false,
+                animation: google.maps.Animation.DROP,
+            });
+            
+            var infoboxContent = '<div class="infoW" style="height:300px;">' +
+                                    '<div class="propImg">' +
+                                        '<img src="' + marker.ImageUrl + '">' +
+                                        '<div class="propBg">' +
+                                            '<div class="propPrice"><a target="_blank" style="padding-left:5px;padding-right:5px; border-radius: 10px; border: 2px solid; border-color: black; color:black; background-color:#99FF66" href="http://www.' + marker.Site + '">'+
+                                            marker.Site + '</a></div>' +
+                                         
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="paWrapper">' +
+                                        '<div class="propTitle">' + marker.Name + '</div>' +
+                                        marker.Description.substring(0, 80) +
+                                    '</div>' +
+                                    
+                                    '<div class="clearfix"></div>' +
+                                    '<div class="infoButtons">' +
+                                        '<a class="btn btn-sm btn-round btn-gray btn-o closeInfo">Close</a>' +
+                                        '<a href="single.jsp" class="btn btn-sm btn-round btn-green viewInfo">View</a>' +
+                                    '</div>' +
+                                 '</div>';
+
+            google.maps.event.addListener(markerVar, 'click', (function(marker, i) {
+                return function() {
+                    infobox.setContent(infoboxContent);
+                    infobox.open(map, marker);
+                }
+            })(markerVar, i));
+
+            $(document).on('click', '.closeInfo', function() {
+                infobox.open(null,null);
+            });
+
+            markers.push(markerVar);
+            console.log("marker put");
+        });
+    }
+    
+    
+    
+    
     
     
     function validateCategoryForm() {
@@ -234,7 +315,7 @@
     });
 
     map.mapTypes.set('Styled', styledMapType);
-    map.setCenter(new google.maps.LatLng(40.6984237,-73.9890044));
+    map.setCenter(new google.maps.LatLng(47.0263795,28.840946));
     map.setZoom(14);
 
 

@@ -6,8 +6,6 @@
 	MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
 	List<MarkersCategory> categories = null;
 	
-    
-	
 %>
 
 <head>
@@ -137,7 +135,7 @@
 
 
 				<h1>List a New Category</h1>
-				<form role="form" action="AddServlet" method="post" onsubmit="return validateCategoryForm()" name="categoryForm">
+				<form role="form" action="add.jsp" method="post" onsubmit="return validateCategoryForm()" name="categoryForm">
 					<input type="hidden" name="requestType" value="addCategory" />
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -173,7 +171,7 @@
 
 
 
-				<form role="form" action="AddServlet" method="post" onsubmit="return validateMarkerForm()" name="markerForm">
+				<form role="form" action="add.jsp" method="post" onsubmit="return validateMarkerForm()" name="markerForm">
 					<input type="hidden" name="requestType" value="addMarker" />
 
 					<div class="row">

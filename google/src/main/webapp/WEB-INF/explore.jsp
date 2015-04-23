@@ -2,11 +2,7 @@
 <html lang="en">
 <%@ page
 	import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl"%>
-<%
-	MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
-	List<MarkersCategory> categories = null;
-	
-%>
+
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -129,73 +125,26 @@
 								</a>
 								<ul class="dropdown-menu dropdown-select full" role="menu">
 									<li class="active"><input type="radio" name="pType"
-										checked="checked"><a
-										href="#" onclick="changeMap('-1');">All</a></li>
+										checked="checked"><a href="#"
+										onclick="changeMap('-1');">All</a></li>
 									<%
-										categories = categoryDao.getAll();
+										List<MarkersCategory> categories = (List<MarkersCategory>) session
+												.getAttribute("categories");
+										if (categories != null) {
+											session.removeAttribute("categories");
+											//categories = categoryDao.getAll();
 
-										for (MarkersCategory cat : categories) {
+											for (MarkersCategory cat : categories) {
 									%>
-									<li><input type="radio" name="ptype" 
-										value="<%=cat.getId()%>"><a
-										href="#" onclick="changeMap('<%=cat.getId()%>');"><%=cat.getName()%></a></li>
+									<li><input type="radio" name="ptype"
+										value="<%=cat.getId()%>"><a href="#"
+										onclick="changeMap('<%=cat.getId()%>');"><%=cat.getName()%></a></li>
 
 									<%
 										}
+										}
 									%>
 								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 formItem">
-							<div class="formField">
-								<label>Price Range</label>
-								<div class="slider priceSlider">
-									<div class="sliderTooltip">
-										<div class="stArrow"></div>
-										<div class="stLabel"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 formItem">
-							<div class="formField">
-								<label>Area Range</label>
-								<div class="slider areaSlider">
-									<div class="sliderTooltip">
-										<div class="stArrow"></div>
-										<div class="stLabel"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 formItem">
-							<div class="formField">
-								<label>Bedrooms</label>
-								<div class="volume">
-									<a href="#" class="btn btn-gray btn-round-left"><span
-										class="fa fa-angle-left"></span></a> <input type="text"
-										class="form-control" readonly="readonly" value="1"> <a
-										href="#" class="btn btn-gray btn-round-right"><span
-										class="fa fa-angle-right"></span></a>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 formItem">
-							<div class="formField">
-								<label>Bathrooms</label>
-								<div class="volume">
-									<a href="#" class="btn btn-gray btn-round-left"><span
-										class="fa fa-angle-left"></span></a> <input type="text"
-										class="form-control" readonly="readonly" value="1"> <a
-										href="#" class="btn btn-gray btn-round-right"><span
-										class="fa fa-angle-right"></span></a>
-									<div class="clearfix"></div>
-								</div>
 							</div>
 						</div>
 					</div>

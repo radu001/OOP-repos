@@ -203,7 +203,7 @@
     });
 
     map.mapTypes.set('Styled', styledMapType);
-    map.setCenter(new google.maps.LatLng(40.6984237,-73.9890044));
+    map.setCenter(new google.maps.LatLng(47.0263795,28.840946));
     map.setZoom(14);
 
 
@@ -274,19 +274,6 @@
         $('.areaSlider .sliderTooltip').css('left', areaSliderLeft);
     }
 
-    var repositionTooltip = function( e, ui ){
-        var div = $(ui.handle).data("bs.tooltip").$tip[0];
-        var pos = $.extend({}, $(ui.handle).offset(), { 
-                        width: $(ui.handle).get(0).offsetWidth,
-                        height: $(ui.handle).get(0).offsetHeight
-                    });
-        var actualWidth = div.offsetWidth;
-
-        var tp = {left: pos.left + pos.width / 2 - actualWidth / 2}
-        $(div).offset(tp);
-
-        $(div).find(".tooltip-inner").text( ui.value );
-    }
 
     windowResizeHandler();
     $(window).resize(function() {
@@ -295,11 +282,6 @@
 
     setTimeout(function() {
         $('body').removeClass('notransition');
-
-
-        
-
-        
     }, 300);
 
     if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
@@ -411,103 +393,7 @@
         }
     });
 
-    $('.priceSlider').slider({
-        range: true,
-        min: 0,
-        max: 2000000,
-        values: [500000, 1500000],
-        step: 10000,
-        slide: function(event, ui) {
-            $('.priceSlider .sliderTooltip .stLabel').html(
-                '$' + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
-                ' <span class="fa fa-arrows-h"></span> ' +
-                '$' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-            );
-            var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
-            var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
-            var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
-            $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
-        }
-    });
-    $('.priceSlider .sliderTooltip .stLabel').html(
-        '$' + $('.priceSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
-        ' <span class="fa fa-arrows-h"></span> ' +
-        '$' + $('.priceSlider').slider('values', 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-    );
-    var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
-    var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
-    var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
-    $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
-
-    $('.areaSlider').slider({
-        range: true,
-        min: 0,
-        max: 20000,
-        values: [5000, 10000],
-        step: 10,
-        slide: function(event, ui) {
-            $('.areaSlider .sliderTooltip .stLabel').html(
-                ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' Sq Ft' +
-                ' <span class="fa fa-arrows-h"></span> ' +
-                ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' Sq Ft'
-            );
-            var areaSliderRangeLeft = parseInt($('.areaSlider .ui-slider-range').css('left'));
-            var areaSliderRangeWidth = $('.areaSlider .ui-slider-range').width();
-            var areaSliderLeft = areaSliderRangeLeft + ( areaSliderRangeWidth / 2 ) - ( $('.areaSlider .sliderTooltip').width() / 2 );
-            $('.areaSlider .sliderTooltip').css('left', areaSliderLeft);
-        }
-    });
-    $('.areaSlider .sliderTooltip .stLabel').html(
-        $('.areaSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' Sq Ft' +
-        ' <span class="fa fa-arrows-h"></span> ' +
-        $('.areaSlider').slider('values', 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' Sq Ft'
-    );
-    var areaSliderRangeLeft = parseInt($('.areaSlider .ui-slider-range').css('left'));
-    var areaSliderRangeWidth = $('.areaSlider .ui-slider-range').width();
-    var areaSliderLeft = areaSliderRangeLeft + ( areaSliderRangeWidth / 2 ) - ( $('.areaSlider .sliderTooltip').width() / 2 );
-    $('.areaSlider .sliderTooltip').css('left', areaSliderLeft);
-
-    $('.volume .btn-round-right').click(function() {
-        var currentVal = parseInt($(this).siblings('input').val());
-        if (currentVal < 10) {
-            $(this).siblings('input').val(currentVal + 1);
-        }
-    });
-    $('.volume .btn-round-left').click(function() {
-        var currentVal = parseInt($(this).siblings('input').val());
-        if (currentVal > 1) {
-            $(this).siblings('input').val(currentVal - 1);
-        }
-    });
-
-    $('.handleFilter').click(function() {
-        $('.filterForm').slideToggle(200);
-    });
-
-    //Enable swiping
-    $(".carousel-inner").swipe( {
-        swipeLeft:function(event, direction, distance, duration, fingerCount) {
-            $(this).parent().carousel('next'); 
-        },
-        swipeRight: function() {
-            $(this).parent().carousel('prev');
-        }
-    });
-
-    $(".carousel-inner .card").click(function() {
-        window.open($(this).attr('data-linkto'), '_self');
-    });
-
-    $('#content').scroll(function() {
-        if ($('.comments').length > 0) {
-            var visible = $('.comments').visible(true);
-            if (visible) {
-                $('.commentsFormWrapper').addClass('active');
-            } else {
-                $('.commentsFormWrapper').removeClass('active');
-            }
-        }
-    });
+    
 
     $('.btn').click(function() {
         if ($(this).is('[data-toggle-class]')) {
@@ -582,32 +468,8 @@
         'defaultText': 'Add a tag',
     });
 
-    $('#datepicker').datepicker();
 
-    // functionality for autocomplete address field
-    if ($('#address').length > 0) {
-        var address = document.getElementById('address');
-        var addressAuto = new google.maps.places.Autocomplete(address);
 
-        google.maps.event.addListener(addressAuto, 'place_changed', function() {
-            var place = addressAuto.getPlace();
-
-            if (!place.geometry) {
-                return;
-            }
-            if (place.geometry.viewport) {
-                map.fitBounds(place.geometry.viewport);
-            } else {
-                map.setCenter(place.geometry.location);
-            }
-            newMarker.setPosition(place.geometry.location);
-            newMarker.setVisible(true);
-            $('#latitude').text(newMarker.getPosition().lat());
-            $('#longitude').text(newMarker.getPosition().lng());
-
-            return false;
-        });
-    }
 
     $('input, textarea').placeholder();
 
