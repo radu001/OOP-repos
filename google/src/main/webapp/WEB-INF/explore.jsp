@@ -176,8 +176,7 @@
 							</div>
 							<h2><%=marker.getName()%></h2>
 							<div class="cardAddress">
-								<span class="icon-pointer"></span> 39 Remsen St, Brooklyn, NY
-								11201, USA
+								<span class="icon-pointer"></span><%=marker.getAddress()%>
 							</div>
 							
 							<div class="cardAddress" style="height:60px; display:block;position:relative;text-overflow: ellipsis;
