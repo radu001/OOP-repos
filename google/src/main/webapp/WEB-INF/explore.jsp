@@ -165,12 +165,10 @@
 
 
 					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-						<a href="single.jsp" class="card" onmouseover="focusMarker('<%=marker.getId()%>');">
+						<a href="single.jsp?Id=<%=marker.getId() %>" class="card" onmouseover="focusMarker('<%=marker.getId()%>');">
 							<div class="figure">
 								<img src="<%=marker.getImageUrl()%>" alt="image" width="266" height="166">
-								<div class="figCaption">
-									<%=marker.getSite()%>
-								</div>
+								<div class="figCaption"></div>
 								<div class="figView">
 									<span class="icon-eye"></span>
 								</div>
@@ -181,16 +179,14 @@
 								<span class="icon-pointer"></span> 39 Remsen St, Brooklyn, NY
 								11201, USA
 							</div>
-							<div class="cardRating">
-								<span class="fa fa-star"></span> <span class="fa fa-star"></span>
-								<span class="fa fa-star"></span> <span class="fa fa-star"></span>
-								<span class="fa fa-star-o"></span> (146)
+							
+							<div class="cardAddress" style="height:60px; display:block;position:relative;text-overflow: ellipsis;
+							word-wrap: break-word;white-space: pre"><%=marker.getDescription() %></div>
+							
+							<div class="cardAddress">
+							<%=marker.getSite() %>
 							</div>
-							<ul class="cardFeat">
-								<li><span class="fa fa-moon-o"></span> 3</li>
-								<li><span class="icon-drop"></span> 2</li>
-								<li><span class="icon-frame"></span> 3430 Sq Ft</li>
-							</ul>
+							
 							<div class="clearfix"></div>
 						</a>
 					</div>

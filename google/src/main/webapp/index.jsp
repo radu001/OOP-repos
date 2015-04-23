@@ -33,7 +33,7 @@
                     <ul>
                         
                         <li><a href="#" data-toggle="modal" data-target="#signin">Sign In</a></li>
-                        <li><a href="add.jsp" class="btn btn-green">List a Property</a></li>
+                        <li><a href="explore.jsp" class="btn btn-green">List a Property</a></li>
                     </ul>
                 </div>
             </div>
