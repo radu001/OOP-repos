@@ -271,12 +271,16 @@
 							</div>
 						</div>
 					</div>
+					
+					<div class="form-group">
+						<label>Address</label> <input type="text" class="form-control" name="address">
+					</div>
 
 					<div class="form-group">
 						<label>Image Url</label> <input type="text" class="form-control" name="imageUrl">
 					</div>
 					<div class="form-group">
-						<label>Icon Url</label> <input type="text" class="form-control" name="iconUrl">
+						<label>Icon Url</label> <input type="text" class="form-control" name="iconUrl" value="images/marker-green.png">
 					</div>
 
 					

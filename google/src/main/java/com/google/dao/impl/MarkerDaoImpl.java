@@ -29,24 +29,24 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 
 			PreparedStatement preparedStatement = null;
 			String insertSQL = "INSERT INTO marker"
-					+ "(name,description, imageUrl, iconUrl, site, latitude, longitude, route, fk_category) VALUES"
-					+ "(?,?,?,?,?,?,?,?,?)";
+					+ "(name,description, address, imageUrl, iconUrl, site, latitude, longitude, route, fk_category) VALUES"
+					+ "(?,?,?,?,?,?,?,?,?,?)";
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, object.getName());
 			preparedStatement.setString(2, object.getDescription());
-			preparedStatement.setString(3, object.getImageUrl());
-			preparedStatement.setString(4, object.getIconUrl());
-			preparedStatement.setString(5, object.getSite());
-			preparedStatement.setDouble(6, object.getLatitude());
-			preparedStatement.setDouble(7, object.getLongitude());
-			preparedStatement.setString(8, object.getRouteStr());
-			preparedStatement.setFloat(9, object.getFk_category());
-			
+			preparedStatement.setString(3, object.getAddress());
+			preparedStatement.setString(4, object.getImageUrl());
+			preparedStatement.setString(5, object.getIconUrl());
+			preparedStatement.setString(6, object.getSite());
+			preparedStatement.setDouble(7, object.getLatitude());
+			preparedStatement.setDouble(8, object.getLongitude());
+			preparedStatement.setString(9, object.getRouteStr());
+			preparedStatement.setFloat(10, object.getFk_category());
+
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			System.out
-					.print(" SQLException in method MarkerDaoImpl.insert : "
-							+ e.getMessage());
+			System.out.print(" SQLException in method MarkerDaoImpl.insert : "
+					+ e.getMessage());
 			throw new DaoException(e);
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.insert "
@@ -68,18 +68,18 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 			// Extact result from ResultSet rs
 			while (rs.next()) {
 				marker = new Marker(rs.getInt("idMarker"),
-						rs.getString("name"), rs.getString("description"),rs.getString("imageUrl"),
+						rs.getString("name"), rs.getString("description"),
+						rs.getString("address"), rs.getString("imageUrl"),
 						rs.getString("iconUrl"), rs.getString("site"),
-						rs.getDouble("latitude"), rs.getDouble("longitude"), 
+						rs.getDouble("latitude"), rs.getDouble("longitude"),
 						rs.getString("route"), rs.getInt("fk_category"));
 			}
 			// close ResultSet rs
 			rs.close();
 
 		} catch (SQLException e) {
-			System.out
-					.print(" SQLException in method MarkerDaoImpl.getByPK : "
-							+ e.getMessage());
+			System.out.print(" SQLException in method MarkerDaoImpl.getByPK : "
+					+ e.getMessage());
 			throw new DaoException(e);
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.getByPK "
@@ -90,31 +90,29 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 		}
 		return marker;
 	}
-	
-	
 
 	public void update(Marker object) throws DaoException {
 		Connection connection = connectionPool.getConnectionFromPool();
 		PreparedStatement preparedStatement = null;
 		try {
-			String query = "update marker set name = ?,description = ?, imageUrl = ?, iconUrl = ?, site = ?, latitude = ?, longitude = ?, route = ?, fk_category = ? where idMarker = ?";
+			String query = "update marker set name = ?,description = ?,address = ?, imageUrl = ?, iconUrl = ?, site = ?, latitude = ?, longitude = ?, route = ?, fk_category = ? where idMarker = ?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, object.getName());
 			preparedStatement.setString(2, object.getDescription());
-			preparedStatement.setString(3, object.getImageUrl());
-			preparedStatement.setString(4, object.getIconUrl());
-			preparedStatement.setString(5, object.getSite());
-			preparedStatement.setDouble(6, object.getLatitude());
-			preparedStatement.setDouble(7, object.getLongitude());
-			preparedStatement.setString(8, object.getRouteStr());
-			preparedStatement.setFloat(9, object.getFk_category());
-			preparedStatement.setInt(10, object.getId());
+			preparedStatement.setString(3, object.getAddress());
+			preparedStatement.setString(4, object.getImageUrl());
+			preparedStatement.setString(5, object.getIconUrl());
+			preparedStatement.setString(6, object.getSite());
+			preparedStatement.setDouble(7, object.getLatitude());
+			preparedStatement.setDouble(8, object.getLongitude());
+			preparedStatement.setString(9, object.getRouteStr());
+			preparedStatement.setFloat(10, object.getFk_category());
+			preparedStatement.setInt(11, object.getId());
 
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			System.out
-					.print(" SQLException in method MarkerDaoImpl.update : "
-							+ e.getMessage());
+			System.out.print(" SQLException in method MarkerDaoImpl.update : "
+					+ e.getMessage());
 			throw new DaoException(e);
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.update "
@@ -135,9 +133,8 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 			preparedStatement.setInt(1, object.getId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			System.out
-					.print(" SQLException in method MarkerDaoImpl.delete : "
-							+ e.getMessage());
+			System.out.print(" SQLException in method MarkerDaoImpl.delete : "
+					+ e.getMessage());
 			throw new DaoException(e);
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.delete "
@@ -160,9 +157,10 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 			// Extact result from ResultSet rs
 			while (rs.next()) {
 				marker = new Marker(rs.getInt("idMarker"),
-						rs.getString("name"), rs.getString("description"),rs.getString("imageUrl"),
+						rs.getString("name"), rs.getString("description"),
+						rs.getString("address"), rs.getString("imageUrl"),
 						rs.getString("iconUrl"), rs.getString("site"),
-						rs.getDouble("latitude"), rs.getDouble("longitude"), 
+						rs.getDouble("latitude"), rs.getDouble("longitude"),
 						rs.getString("route"), rs.getInt("fk_category"));
 				markers.add(marker);
 			}
@@ -170,9 +168,8 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 			rs.close();
 
 		} catch (SQLException e) {
-			System.out
-					.print(" SQLException in method MarkerDaoImpl.getAll : "
-							+ e.getMessage());
+			System.out.print(" SQLException in method MarkerDaoImpl.getAll : "
+					+ e.getMessage());
 			throw new DaoException(e);
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.getAll "
@@ -212,7 +209,7 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 		}
 		return count;
 	}
-	
+
 	public List<Marker> getByFK(int fk) throws DaoException {
 		Connection connection = connectionPool.getConnectionFromPool();
 		Marker marker = null;
@@ -225,9 +222,10 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 			// Extact result from ResultSet rs
 			while (rs.next()) {
 				marker = new Marker(rs.getInt("idMarker"),
-						rs.getString("name"), rs.getString("description"),rs.getString("imageUrl"),
+						rs.getString("name"), rs.getString("description"),
+						rs.getString("address"), rs.getString("imageUrl"),
 						rs.getString("iconUrl"), rs.getString("site"),
-						rs.getFloat("latitude"), rs.getFloat("longitude"),
+						rs.getDouble("latitude"), rs.getDouble("longitude"),
 						rs.getString("route"), rs.getInt("fk_category"));
 				markers.add(marker);
 			}
@@ -235,9 +233,8 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 			rs.close();
 
 		} catch (SQLException e) {
-			System.out
-					.print(" SQLException in method MarkerDaoImpl.getByFK : "
-							+ e.getMessage());
+			System.out.print(" SQLException in method MarkerDaoImpl.getByFK : "
+					+ e.getMessage());
 			throw new DaoException(e);
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.getByFK "

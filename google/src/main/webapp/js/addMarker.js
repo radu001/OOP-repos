@@ -36,6 +36,8 @@
         var route =  document.forms["markerForm"]["route"].value;
         var imageUrl =  document.forms["markerForm"]["imageUrl"].value;
         var iconUrl =  document.forms["markerForm"]["iconUrl"].value;
+        var address = document.forms["markerForm"]["address"].value;
+        
         
         if (title == null || title == "")
         	str = str.concat("Title empty \n");
@@ -58,8 +60,13 @@
         if (imageUrl == null || imageUrl == "")
         	str = str.concat("Image url empty \n");
         
+        if (address == null || address == "")
+        	str = str.concat("Address is empty \n");
+        console.log("address: " + address);
+        
         if (iconUrl == null || iconUrl == "")
-        	str = str.concat("Icon url empty \n");
+        	document.getElementById("iconUrl").value = "images/marker-green.png";
+        
         
         if (str != "") {
             alert(str);

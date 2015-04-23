@@ -69,9 +69,9 @@ public class AddServlet extends HttpServlet {
 			String site = req.getParameter("webSite");
 			String iconUrl = req.getParameter("iconUrl");
 			String imageUrl = req.getParameter("imageUrl");
-
+			String address = req.getParameter("address");
 			
-			Marker m = new Marker(0, title,description,imageUrl, iconUrl, site,  Double.parseDouble(latitude), Double.parseDouble(longitude),
+			Marker m = new Marker(0, title,description,address, imageUrl, iconUrl, site,  Double.parseDouble(latitude), Double.parseDouble(longitude),
 					route,Integer.parseInt(category));
 			
 			MarkerDaoImpl markerDao = new MarkerDaoImpl();

@@ -71,6 +71,7 @@ public class GetMarkersServlet extends HttpServlet {
 					markerJson.put("Name", marker.getName());
 					markerJson.put("Id", marker.getId());
 					markerJson.put("Description", marker.getDescription());
+					markerJson.put("Address", marker.getAddress());
 					markerJson.put("ImageUrl", marker.getImageUrl());
 					markerJson.put("IconUrl", marker.getIconUrl());
 					markerJson.put("Site", marker.getSite());

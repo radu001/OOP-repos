@@ -8,13 +8,15 @@ public class Marker extends BaseEntity implements Comparable<Marker> {
 	private double latitude;
 	private double longitude;
 	private String site;
-	private Route route;
 	private int fk_category;
 	private String routeStr;
 	private String imageUrl;
+	private String address;
 
 
-	public Marker(int idMarker, String title, String description, String imageUrl,
+
+
+	public Marker(int idMarker, String title, String description, String address, String imageUrl,
 			String iconUrl, String site, double latitude, double longitude, String routeStr, int fk_category) {
 		setId(idMarker);
 		setName(title);
@@ -26,6 +28,7 @@ public class Marker extends BaseEntity implements Comparable<Marker> {
 		this.site = site;
 		this.routeStr = routeStr;
 		this.fk_category = fk_category;
+		this.address = address;
 	}
 
 	public int compareTo(Marker m2) {
@@ -38,6 +41,14 @@ public class Marker extends BaseEntity implements Comparable<Marker> {
 		return res;
 	}
 
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	
 	public String getImageUrl() {
 		return imageUrl;
@@ -62,15 +73,6 @@ public class Marker extends BaseEntity implements Comparable<Marker> {
 	public void setFk_category(int fk_category) {
 		this.fk_category = fk_category;
 	}
-	
-	public Route getRoute() {
-		return route;
-	}
-
-	public void setRoute(Route route) {
-		this.route = route;
-	}
-
 
 	public String getDescription() {
 		return description;
