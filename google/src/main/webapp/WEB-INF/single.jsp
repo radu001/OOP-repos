@@ -103,10 +103,15 @@
 	<!-- Content -->
 
 	<%
-										Marker marker = (Marker) session.getAttribute("marker");
-										if (marker != null) {
-											session.removeAttribute("categories"); 
-											%>
+		List<MarkersCategory> categories = (List<MarkersCategory>) 
+		session.getAttribute("categories");
+						
+		Marker marker = (Marker) session.getAttribute("marker");
+
+		MarkersCategory category = (MarkersCategory) session.getAttribute("category");
+
+		int categoryId = category.getId();
+	%>
 
 	<div id="wrapper">
 		<div id="mapView" class="mob-min">
@@ -115,176 +120,215 @@
 			</div>
 		</div>
 		<div id="content" class="mob-max">
-		
-		
-					<div class="filter">
-				<h1 class="osLight">Filter your results</h1>
+
+
+			<div class="filter">
+
+				<h1 class="osLight">Edit markers and categories</h1>
 				<a href="#" class="handleFilter"><span class="icon-equalizer"></span></a>
 				<div class="clearfix"></div>
-				<div class ="filterForm" style="display:none">
-			<h1>List a New Category</h1>
-				<form role="form" action="add.jsp" method="post" onsubmit="return validateCategoryForm()" name="categoryForm">
-					<input type="hidden" name="requestType" value="addCategory" />
+				<div class="filterForm" style="display: none">
 					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-							<div class="form-group">
-								<label>Title</label> <input type="text" class="form-control"
-									name="title">
-							</div>
-						</div>
-						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-							<div class="form-group">
-								<label>Visibility</label>
-								<div class="checkbox custom-checkbox">
-									<label> <input type="checkbox" name="visibility"><span
-										class="fa fa-check"></span>Public
-									</label>
+						<h1>Update Category</h1>
+					</div>
+					<%
+						if(category != null){
+					%>
+					<form role="form" action="add.jsp" method="post"
+						onsubmit="return validateCategoryForm()" name="categoryForm">
+						<input type="hidden" name="requestType" value="addCategory" />
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+								<div class="form-group">
+									<label>Title</label> <input type="text" class="form-control"
+										name="title" value="<%=category.getName()%>">
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label>Description</label>
-						<textarea class="form-control" rows="4" name="description"></textarea>
-					</div>
+						<div class="form-group">
+							<label>Description</label>
+							<textarea class="form-control" rows="4" name="description"><%=category.getDescription()%></textarea>
+						</div>
 
-					<div class="form-group">
-						<input type="submit" class="btn btn-green btn-lg"
-							value="Add Category">
-					</div>
-				</form>
-
-				<BR> <BR>
-				<h1>List a New Marker</h1>
-
-				<form role="form" action="add.jsp" method="post" onsubmit="return validateMarkerForm()" name="markerForm">
-					<input type="hidden" name="requestType" value="addMarker" />
-
+						<div class="form-group">
+							<input type="submit" class="btn btn-green btn-lg"
+								value="Update Category">
+						</div>
+					</form>
+					<%
+						}
+					%>
+					<BR> <BR>
 					<div class="row">
+						<%
+							if (marker != null) {
+						%>
 
-						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-							<div class="form-group">
-								<label>Title</label> <input type="text" class="form-control" name="title">
-							</div>
-						</div>
-
-						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-							<div class="btn-group">
-								<label>Category</label>
-								<div class="clearfix"></div>
-								<a href="#" data-toggle="dropdown"
-									class="btn btn-default dropdown-toggle"> <span
-									class="dropdown-label">Select...</span>&nbsp;&nbsp;&nbsp;<span
-									class="caret"></span>
-								</a>
-								<ul class="dropdown-menu dropdown-select">
-									
-									<li><input type="radio" name="ptype"
-										value=""><a href="#"></a></li>
-
-								</ul>
-							</div>
-						</div>
+						<h1>Update Marker</h1>
 					</div>
+					<form role="form" action="add.jsp" method="post"
+						onsubmit="return validateMarkerForm()" name="markerForm">
+						<input type="hidden" name="requestType" value="addMarker" />
 
-					<div class="form-group">
-						<label>Description</label>
-						<textarea class="form-control" rows="4" name="description"></textarea>
-					</div>
+						<div class="row">
 
+							<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+								<div class="form-group">
+									<label>Title</label> <input type="text" class="form-control"
+										value="<%=marker.getName()%>" name="title">
+								</div>
+							</div>
 
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-							<div class="form-group">
-								<label>Latitude</label> <input type="text" class="form-control" name="latitude"
-									id="latitude">
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+								<div class="btn-group">
+									<label>Category</label>
+									<div class="clearfix"></div>
+									<a href="#" data-toggle="dropdown"
+										class="btn btn-default dropdown-toggle"> <span
+										class="dropdown-label"><%= category.getName() %></span>&nbsp;&nbsp;&nbsp;<span
+										class="caret"></span>
+									</a>
+									<ul class="dropdown-menu dropdown-select">
+										<%
+										if(categories != null) {
+											session.removeAttribute("categories");
+
+											for (MarkersCategory cat : categories) {
+											if(cat.getId() != categoryId) 
+																			{
+										%>
+										<li><input type="radio" name="ptype"
+											value="<%=cat.getId()%>"><a href="#"><%=cat.getName()%></a></li>
+										<%
+											} else {
+										%>
+										<li class="active"><input type="radio" name="ptype"
+											value="<%=cat.getId()%>"><a href="#"><%=cat.getName()%></a></li>
+										<%
+											}
+																		}
+																	}
+										%>
+									</ul>
+								</div>
 							</div>
 						</div>
-						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-							<div class="form-group">
-								<label>Longitude</label> <input type="text" class="form-control" name="longitude"
-									id="longitude">
-							</div>
+
+						<div class="form-group">
+							<label>Description</label>
+							<textarea class="form-control" rows="4" name="description"><%=marker.getDescription()%></textarea>
 						</div>
-						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-							<div class="input-group">
-								<label>Put Marker</label> <input type="button"
-									value="Put marker" class="btn btn-green btn-lg"
-									style="height: 37px;" id="putMarkerBtn" onclick="putMarker()">
+
+
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+								<div class="form-group">
+									<label>Latitude</label> <input type="text" class="form-control"
+										name="latitude" id="latitude"
+										value="<%=marker.getLatitude()%>">
+								</div>
 							</div>
-						</div>
-						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-							<div class="form-group">
-								<label>Web Site</label>
+							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+								<div class="form-group">
+									<label>Longitude</label> <input type="text"
+										class="form-control" name="longitude" id="longitude"
+										value="<%=marker.getLongitude()%>">
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 								<div class="input-group">
-									<input class="form-control" type="text" name="webSite">
+									<label>Put Marker</label> <input type="button"
+										value="Put marker" class="btn btn-green btn-lg"
+										style="height: 37px;" id="putMarkerBtn" onclick="putMarker()">
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+								<div class="form-group">
+									<label>Web Site</label>
+									<div class="input-group">
+										<input class="form-control" type="text" name="webSite"
+											value="<%=marker.getSite()%>">
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 
 
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="width:50%;">
-							<div class="input-group">
-								<label>Route</label>
-								<textarea class="form-control" rows="1" id="routeString" name="route"></textarea>
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3"
+								style="width: 50%;">
+								<div class="input-group">
+									<label>Route</label>
+									<textarea class="form-control" rows="1" id="routeString"
+										name="route"><%=marker.getRouteStr()%></textarea>
+								</div>
 							</div>
+
+
+
+							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+								<div class="input-group">
+									<label>Start route</label> <input type="button"
+										value="Start route" class="btn btn-green btn-lg"
+										style="height: 37px;" id="startRouteBtn"
+										onclick="startRoute()">
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+								<div class="input-group">
+									<label>Clear route</label> <input type="button"
+										value="Clear route" class="btn btn-green btn-lg"
+										style="height: 37px;" onclick="clearRoute()">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label>Address</label> <input type="text" class="form-control"
+								name="address" id="address" value="<%=marker.getAddress()%>">
+						</div>
+
+						<div class="form-group">
+							<label>Image Url</label> <input type="text" class="form-control"
+								name="imageUrl" value="<%=marker.getImageUrl()%>">
+						</div>
+						<div class="form-group">
+							<label>Icon Url</label> <input type="text" class="form-control"
+								name="iconUrl" value="<%=marker.getIconUrl()%>">
 						</div>
 
 
 
-						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-							<div class="input-group">
-								<label>Start route</label> <input type="button"
-									value="Start route" class="btn btn-green btn-lg"
-									style="height: 37px;" id="startRouteBtn" onclick="startRoute()">
-							</div>
+
+						<div class="form-group">
+							<input type="submit" class="btn btn-green btn-lg"
+								value=" Update Marker ">
 						</div>
-
-						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-							<div class="input-group">
-								<label>Clear route</label> <input type="button"
-									value="Clear route" class="btn btn-green btn-lg"
-									style="height: 37px;" onclick="clearRoute()">
-							</div>
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label>Address</label> <input type="text" class="form-control" name="address" id="address">
-					</div>
-
-					<div class="form-group">
-						<label>Image Url</label> <input type="text" class="form-control" name="imageUrl">
-					</div>
-					<div class="form-group">
-						<label>Icon Url</label> <input type="text" class="form-control" name="iconUrl" value="images/marker-green.png">
-					</div>
-
-					
-						
-
-					<div class="form-group">
-						<input type="submit" class="btn btn-green btn-lg"
-							value=" Add Marker ">
-					</div>
-				</form>
+					</form>
+					<%
+						}
+					%>
 				</div>
 			</div>
-		
-		
+
+
+			<%
+				if (marker != null) {
+			%>
 			<div class="singleTop">
 				<div>
-					<img src="<%=marker.getImageUrl()%>" style="width:100%;">
+					<img src="<%=marker.getImageUrl()%>" style="width: 100%;">
 				</div>
 				<div class="summary">
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 							<div class="summaryItem">
-								<h1 class="pageTitle">Name : <%=marker.getName() %></h1>
+								<h1 class="pageTitle">
+									Name :
+									<%=marker.getName()%></h1>
 								<div class="address">
-									<span class="icon-pointer"></span><%=marker.getAddress() %>
+									<span class="icon-pointer"></span><%=marker.getAddress()%>
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -292,18 +336,22 @@
 					</div>
 				</div>
 				<div class="address">
-				<p style="text-align:right;padding-right:5%;"><a target="_blank" href="http://www.<%=marker.getSite()%>"><%=marker.getSite() %></a></p>							
+					<p style="text-align: right; padding-right: 5%;">
+						<a target="_blank" href="http://www.<%=marker.getSite()%>"><%=marker.getSite()%></a>
+					</p>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 			<div class="description">
 				<h3>Description</h3>
-				<p><%=marker.getDescription() %></p>
+				<p><%=marker.getDescription()%></p>
 			</div>
 
 		</div>
-		
-		<%} %>
+
+		<%
+			}
+		%>
 
 		<div class="clearfix"></div>
 	</div>

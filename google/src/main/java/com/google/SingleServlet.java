@@ -14,12 +14,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.dao.impl.MarkerDaoImpl;
+import com.google.dao.impl.MarkersCategoryDaoImpl;
 import com.google.entity.Marker;
+import com.google.entity.MarkersCategory;
 import com.google.exception.DaoException;
 
 public class SingleServlet extends HttpServlet{
+	
 	MarkerDaoImpl markerDao = new MarkerDaoImpl();
+	MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
 	Marker marker = null;
+	MarkersCategory category = null;
+	List<MarkersCategory> categories = null;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -35,6 +41,8 @@ public class SingleServlet extends HttpServlet{
 			id = Integer.parseInt(markerId);
 			System.out.println(id);
 			marker = markerDao.getByPK(id);
+			categories = categoryDao.getAll();
+			category = categoryDao.getByPK(marker.getFk_category());
 			
 		} catch (DaoException e) {
 			System.out.println("exception");
@@ -45,7 +53,9 @@ public class SingleServlet extends HttpServlet{
 			req.getRequestDispatcher("/WEB-INF/explore.jsp").forward(req, resp);
 			return;
 		}
-		
+		System.out.println("size:" + categories.size());
+		session.setAttribute("categories", categories);
+		session.setAttribute("category", category);
 		session.setAttribute("idMarker", id);
 		session.setAttribute("marker", marker);
 		//System.out.println("hello");

@@ -2,11 +2,7 @@
 <html lang="en">
 <%@ page
 	import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl"%>
-<%
-	MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
-	List<MarkersCategory> categories = null;
-	
-%>
+
 
 <head>
 <meta charset="utf-8">
@@ -193,7 +189,11 @@
 								</a>
 								<ul class="dropdown-menu dropdown-select">
 									<%
-										categories = categoryDao.getAll();
+									
+									List<MarkersCategory> categories = (List<MarkersCategory>) 
+									session.getAttribute("categories");
+									if (categories != null) {
+										session.removeAttribute("categories");
 
 										for (MarkersCategory cat : categories) {
 									%>
@@ -202,6 +202,7 @@
 
 									<%
 										}
+									}
 									%>
 								</ul>
 							</div>
