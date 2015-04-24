@@ -1,12 +1,17 @@
 package com.google;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.google.dao.impl.MarkerDaoImpl;
 import com.google.entity.Marker;
@@ -22,8 +27,9 @@ public class SingleServlet extends HttpServlet{
 
 		HttpSession session=req.getSession();  
 		String markerId;
-		int id;
+		int id = 0;
 		marker = null;
+			
 		try {
 			markerId = req.getParameter("Id");
 			id = Integer.parseInt(markerId);
@@ -40,9 +46,61 @@ public class SingleServlet extends HttpServlet{
 			return;
 		}
 		
+		session.setAttribute("idMarker", id);
 		session.setAttribute("marker", marker);
 		//System.out.println("hello");
 		req.getRequestDispatcher("/WEB-INF/single.jsp").forward(req, resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		JSONObject markerJson;
+		
+		HttpSession session=req.getSession();  
+		
+		marker = (Marker) session.getAttribute("marker");
+
+		try {
+				markerJson = new JSONObject();
+
+				markerJson.put("Name", marker.getName());
+				markerJson.put("Id", marker.getId());
+				markerJson.put("Description", marker.getDescription());
+				markerJson.put("Address", marker.getAddress());
+				markerJson.put("ImageUrl", marker.getImageUrl());
+				markerJson.put("IconUrl", marker.getIconUrl());
+				markerJson.put("Site", marker.getSite());
+				markerJson.put("Latitude", marker.getLatitude());
+				markerJson.put("Longitude", marker.getLongitude());
+				markerJson.put("Route", marker.getRouteStr());
+			
+
+			resp.setContentType("application/json");
+			resp.getWriter().write(markerJson.toString());
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 
