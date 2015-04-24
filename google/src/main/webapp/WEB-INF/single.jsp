@@ -134,9 +134,10 @@
 					<%
 						if(category != null){
 					%>
-					<form role="form" action="add.jsp" method="post"
+					<form role="form" action="update" method="post"
 						onsubmit="return validateCategoryForm()" name="categoryForm">
 						<input type="hidden" name="requestType" value="addCategory" />
+						<input type="hidden" value="<%=category.getId() %>" name="categoryId" />
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 								<div class="form-group">
@@ -166,9 +167,10 @@
 
 						<h1>Update Marker</h1>
 					</div>
-					<form role="form" action="add.jsp" method="post"
+					<form role="form" action="update" method="post"
 						onsubmit="return validateMarkerForm()" name="markerForm">
 						<input type="hidden" name="requestType" value="addMarker" />
+						<input type="hidden" value="<%=marker.getId() %>" name="markerId" />
 
 						<div class="row">
 
@@ -202,7 +204,7 @@
 										<%
 											} else {
 										%>
-										<li class="active"><input type="radio" name="ptype"
+										<li class="active"><input type="radio" name="ptype" checked="checked"
 											value="<%=cat.getId()%>"><a href="#"><%=cat.getName()%></a></li>
 										<%
 											}

@@ -1,7 +1,6 @@
 package com.google;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,52 +14,48 @@ import com.google.entity.Marker;
 import com.google.entity.MarkersCategory;
 import com.google.exception.DaoException;
 
-public class AddServlet extends HttpServlet {
+public class UpdateServlet extends HttpServlet{
 
 	MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
 	MarkerDaoImpl markerDao = new MarkerDaoImpl();
-	List<MarkersCategory> categories = null;
+	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 		
 		String title = "", description = "";
-		boolean visibility = false;
 		String requestType = req.getParameter("requestType");
 		HttpSession session=req.getSession();  
 		
 		switch(requestType) {
 		case "addCategory":
 		
-		title = req.getParameter("title");
-
-		if(req.getParameter("visibility") != null)
-		if(req.getParameter("visibility").equals("on"))
-		visibility = true;
-		
+		title = req.getParameter("title");	
 		description = req.getParameter("description");
+		String id = req.getParameter("categoryId");
+		int categoryId = Integer.parseInt(id);
 		
-
-		MarkersCategory categoryT = new MarkersCategory(0, title, description, visibility);
+		MarkersCategory categoryT = new MarkersCategory(categoryId, title, description, true);
 
 			try {
-				categoryDao.insert(categoryT);
-				System.out.println("insert succes");
+				categoryDao.update(categoryT);
+				System.out.println("update succes");
 			} catch (DaoException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-			session.setAttribute("result","succes");
-			resp.sendRedirect("add.jsp");
+			//session.setAttribute("result","succes");
+			resp.sendRedirect("explore.jsp");
 			break;
 			
 			
 		case "addMarker":
-			
+
+			String id2 = req.getParameter("markerId");
+			int markerId = Integer.parseInt(id2);
 			title = req.getParameter("title");
 			description = req.getParameter("description");
 			String category = req.getParameter("ptype");
@@ -72,12 +67,11 @@ public class AddServlet extends HttpServlet {
 			String imageUrl = req.getParameter("imageUrl");
 			String address = req.getParameter("address");
 			
-			Marker m = new Marker(0, title,description,address, imageUrl, iconUrl, site,  Double.parseDouble(latitude), Double.parseDouble(longitude),
+			Marker m = new Marker(markerId, title,description,address, imageUrl, iconUrl, site,  Double.parseDouble(latitude), Double.parseDouble(longitude),
 					route,Integer.parseInt(category));
 			
-
 			try {
-				markerDao.insert(m);
+				markerDao.update(m);
 			} catch (DaoException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -96,31 +90,13 @@ public class AddServlet extends HttpServlet {
 			*/
 			
 			
-			session.setAttribute("result","succes");
-			resp.sendRedirect("add.jsp");
+			//session.setAttribute("result","succes");
+			
+			resp.sendRedirect("explore.jsp");
 			break;
 	}
 		
-	}
-
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	HttpSession session=req.getSession();  
 		
-		try {
-			categories = categoryDao.getAll();
-		} catch (DaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		session.setAttribute("categories", categories);
-		System.out.println("hello");
-		req.getRequestDispatcher("/WEB-INF/add.jsp").forward(req, resp);
 	}
-	
-	
 	
 }

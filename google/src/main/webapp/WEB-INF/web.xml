@@ -24,6 +24,11 @@
         <servlet-name>SingleServlet</servlet-name>
         <servlet-class>com.google.SingleServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>UpdateServlet</servlet-name>
+        <servlet-class>com.google.UpdateServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>AddServlet</servlet-name>
@@ -43,5 +48,10 @@
     <servlet-mapping>
         <servlet-name>SingleServlet</servlet-name>
         <url-pattern>/single.jsp</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>UpdateServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
     </servlet-mapping>
 </web-app>
