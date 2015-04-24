@@ -121,14 +121,157 @@
 				<h1 class="osLight">Filter your results</h1>
 				<a href="#" class="handleFilter"><span class="icon-equalizer"></span></a>
 				<div class="clearfix"></div>
-				<form class="filterForm">
+				<div class ="filterForm" style="display:none">
+			<h1>List a New Category</h1>
+				<form role="form" action="add.jsp" method="post" onsubmit="return validateCategoryForm()" name="categoryForm">
+					<input type="hidden" name="requestType" value="addCategory" />
 					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+							<div class="form-group">
+								<label>Title</label> <input type="text" class="form-control"
+									name="title">
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+							<div class="form-group">
+								<label>Visibility</label>
+								<div class="checkbox custom-checkbox">
+									<label> <input type="checkbox" name="visibility"><span
+										class="fa fa-check"></span>Public
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Description</label>
+						<textarea class="form-control" rows="4" name="description"></textarea>
+					</div>
+
+					<div class="form-group">
+						<input type="submit" class="btn btn-green btn-lg"
+							value="Add Category">
+					</div>
 				</form>
+
+				<BR> <BR>
+				<h1>List a New Marker</h1>
+
+				<form role="form" action="add.jsp" method="post" onsubmit="return validateMarkerForm()" name="markerForm">
+					<input type="hidden" name="requestType" value="addMarker" />
+
+					<div class="row">
+
+						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+							<div class="form-group">
+								<label>Title</label> <input type="text" class="form-control" name="title">
+							</div>
+						</div>
+
+						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+							<div class="btn-group">
+								<label>Category</label>
+								<div class="clearfix"></div>
+								<a href="#" data-toggle="dropdown"
+									class="btn btn-default dropdown-toggle"> <span
+									class="dropdown-label">Select...</span>&nbsp;&nbsp;&nbsp;<span
+									class="caret"></span>
+								</a>
+								<ul class="dropdown-menu dropdown-select">
+									
+									<li><input type="radio" name="ptype"
+										value=""><a href="#"></a></li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label>Description</label>
+						<textarea class="form-control" rows="4" name="description"></textarea>
+					</div>
+
+
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+							<div class="form-group">
+								<label>Latitude</label> <input type="text" class="form-control" name="latitude"
+									id="latitude">
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+							<div class="form-group">
+								<label>Longitude</label> <input type="text" class="form-control" name="longitude"
+									id="longitude">
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+							<div class="input-group">
+								<label>Put Marker</label> <input type="button"
+									value="Put marker" class="btn btn-green btn-lg"
+									style="height: 37px;" id="putMarkerBtn" onclick="putMarker()">
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+							<div class="form-group">
+								<label>Web Site</label>
+								<div class="input-group">
+									<input class="form-control" type="text" name="webSite">
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="width:50%;">
+							<div class="input-group">
+								<label>Route</label>
+								<textarea class="form-control" rows="1" id="routeString" name="route"></textarea>
+							</div>
+						</div>
+
+
+
+						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+							<div class="input-group">
+								<label>Start route</label> <input type="button"
+									value="Start route" class="btn btn-green btn-lg"
+									style="height: 37px;" id="startRouteBtn" onclick="startRoute()">
+							</div>
+						</div>
+
+						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+							<div class="input-group">
+								<label>Clear route</label> <input type="button"
+									value="Clear route" class="btn btn-green btn-lg"
+									style="height: 37px;" onclick="clearRoute()">
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label>Address</label> <input type="text" class="form-control" name="address" id="address">
+					</div>
+
+					<div class="form-group">
+						<label>Image Url</label> <input type="text" class="form-control" name="imageUrl">
+					</div>
+					<div class="form-group">
+						<label>Icon Url</label> <input type="text" class="form-control" name="iconUrl" value="images/marker-green.png">
+					</div>
+
+					
+						
+
+					<div class="form-group">
+						<input type="submit" class="btn btn-green btn-lg"
+							value=" Add Marker ">
+					</div>
+				</form>
+				</div>
 			</div>
-			
-			
-			
-			
 		
 		
 			<div class="singleTop">
