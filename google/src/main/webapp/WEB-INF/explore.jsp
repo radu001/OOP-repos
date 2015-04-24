@@ -148,7 +148,13 @@
 							</div>
 						</div>
 						
-						
+							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+							<div class="input-group">
+								<label>Put Marker</label> <input type="button"
+									value="Close route" class="btn btn-green btn-lg"
+									style="height: 37px;" id="putMarkerBtn" onclick="clearRoute()">
+							</div>
+						</div>
 						
 					</div>
 				</form>
@@ -208,8 +214,7 @@
 	<script src="js/bootstrap.js"></script>
 	<script src="js/jquery.touchSwipe.min.js"></script>
 	<script src="js/jquery.slimscroll.min.js"></script>
-	<script
-		src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=geometry&amp;libraries=places"
+	<script src="http://maps.googleapis.com/maps/api/js?v=3.9&libraries=geometry&libraries=places&sensor=false"
 		type="text/javascript"></script>
 	<script src="js/infobox.js"></script>
 	<script src="js/jquery.tagsinput.min.js"></script>

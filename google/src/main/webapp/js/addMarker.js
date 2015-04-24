@@ -160,8 +160,8 @@
         	  path.push(newMarker.getPosition());
         	  
         	  
-        	  //$('#routeString').val(path.getArray().toString());
-        	  $('#routeString').val(google.maps.geometry.encoding.encodePath(path));
+        	  $('#routeString').val('[' + path.getArray().toString().replace(/\(/g,"[").replace(/\)/g,"]") + ']');
+        	  //$('#routeString').val(google.maps.geometry.encoding.encodePath(path));
         	 
     		  // Add a listener for the click event
     		  clickListener = google.maps.event.addListener(map, 'click', addLatLng);
@@ -170,8 +170,8 @@
     function addLatLng(event) {
     	  path = poly.getPath();
     	  path.push(event.latLng);
-    	  //$('#routeString').val(path.getArray().toString());
-    	  $('#routeString').val(google.maps.geometry.encoding.encodePath(path));
+    	  $('#routeString').val('[' + path.getArray().toString().replace(/\(/g,"[").replace(/\)/g,"]") + ']');
+    	  //$('#routeString').val(google.maps.geometry.encoding.encodePath(path));
     	}
     
     
