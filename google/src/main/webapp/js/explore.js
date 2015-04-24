@@ -9,15 +9,6 @@
     
     function setRoute(marker) {
     	
-    	var regex = new RegExp('(', 'g');
-    	var route = route.replace(regex, ']');
-    	regex = new RegExp(')', 'g');
-    	route = route.replace(regex, ']');
-
-    	route = '[' + route + ']';
-    	
-    	console.log(route);
-    	
     	var polyOptions = {
     		    strokeColor: '#000000',
     		    strokeOpacity: 1.0,
@@ -25,9 +16,8 @@
     		  };
     		  poly = new google.maps.Polyline(polyOptions);
     		  poly.setMap(map);
-    	  	  //poly.setPath(marker.get('route'));
-        	 //console.log(marker.get('route'));
- 
+    		  var route = google.maps.geometry.encoding.decodePath(marker.get('route'));
+    	  	  poly.setPath(route); 
     }
     
     
@@ -133,7 +123,7 @@
                                     '</div>' +
                                  '</div>';
 
-            google.maps.event.addListener(markerVar, 'click', (function(marker, i) {
+            google.maps.event.addListener(markerVar, 'dblclick', (function(marker, i) {
                 return function() {
                     infobox.setContent(infoboxContent);
                     infobox.open(map, marker);
@@ -144,7 +134,7 @@
                 infobox.open(null,null);
             });
 
-            google.maps.event.addListener(markerVar, 'mouseover', function() {
+            google.maps.event.addListener(markerVar, 'click', function() {
                 setRoute(markerVar);
               });
            // markerVar.set('id', marker.Id);
