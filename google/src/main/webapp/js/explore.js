@@ -143,7 +143,7 @@ function putMarkers(markersArray) {
 								'<div class="clearfix"></div>'
 								+ '<div class="infoButtons">'
 								+ '<a class="btn btn-sm btn-round btn-gray btn-o closeInfo">Close</a>'
-								+ '<a href="single.jsp" class="btn btn-sm btn-round btn-green viewInfo">View</a>'
+								+ '<a href="single.jsp?Id=' + marker.Id  + '" class="btn btn-sm btn-round btn-green viewInfo">View</a>'
 								+ '</div>' + '</div>';
 
 						google.maps.event.addListener(markerVar, 'dblclick',

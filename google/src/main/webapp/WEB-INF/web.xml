@@ -19,6 +19,11 @@
         <servlet-name>ExploreServlet</servlet-name>
         <servlet-class>com.google.ExploreServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>SingleServlet</servlet-name>
+        <servlet-class>com.google.SingleServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>AddServlet</servlet-name>
@@ -35,4 +40,8 @@
         <url-pattern>/explore.jsp</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>SingleServlet</servlet-name>
+        <url-pattern>/single.jsp</url-pattern>
+    </servlet-mapping>
 </web-app>
