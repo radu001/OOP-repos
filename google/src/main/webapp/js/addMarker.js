@@ -3,6 +3,23 @@
     var map;
     var poly;
     var path;
+    var geocoder;
+    
+    function autocomplete(latlng) {
+    	 geocoder = new google.maps.Geocoder();
+    	 geocoder.geocode({'latLng': latlng}, function(results, status) {
+    	      if (status == google.maps.GeocoderStatus.OK) {
+    	        if (results[0]) {
+    	          console.log(results);
+    	          document.getElementById("address").value = results[0].formatted_address;
+    	        }
+    	      } else {
+    	        alert("Geocoder failed due to: " + status);
+    	      }
+    	    });
+    }
+    
+    
     
     function validateCategoryForm() {
     	var str = "";
@@ -81,6 +98,7 @@
 
     });
     	
+
     	 document.getElementById("putMarkerBtn").disabled = true; 
     	 
     }
@@ -103,6 +121,13 @@
     	  $('#latitude').val(location.lat());
 	      $('#longitude').val(location.lng());
     	  google.maps.event.removeListener(clickListener);
+    	  
+          google.maps.event.addListener(newMarker,'dragend',function(event) {
+
+          	autocomplete(newMarker.position);
+          });
+          autocomplete(newMarker.position);
+      	
     	  
     	    google.maps.event.addListener(newMarker, "mouseup", function(event) {
     	        $('#latitude').val(this.position.lat());
