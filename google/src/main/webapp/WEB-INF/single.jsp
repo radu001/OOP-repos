@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <%@ page
 	import="java.util.List, com.google.entity.MarkersCategory, com.google.entity.Marker"%>
+
+<%
+	Marker marker = null;
+
+	MarkersCategory category = null;
+
+	int categoryId = 0;
+	
+	List<MarkersCategory> categories = null;
+	if (session.getAttribute("loggedIn") != null) {
+
+		categories = (List<MarkersCategory>) session
+				.getAttribute("categories");
+		marker = (Marker) session.getAttribute("marker");
+		category = (MarkersCategory) session.getAttribute("category");
+		categoryId = category.getId();
+		
+	} else {
+		marker = (Marker) session.getAttribute("marker");
+	}
+%>
+
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -36,6 +58,10 @@
 			<span class="searchIcon icon-magnifier"></span> <input type="text"
 				placeholder="Search for places...">
 		</div>
+		                    		 <%
+        if(session.getAttribute("loggedIn") != null)
+            {
+            %>
 		<div class="headerUserWraper">
 			<a href="#" class="userHandler dropdown-toggle"
 				data-toggle="dropdown"><span class="icon-user"></span><span
@@ -62,6 +88,7 @@
 				</ul>
 			</div>
 		</div>
+		<%} %>
 
 
 		<a href="#" class="mapHandler"><span class="icon-map"></span></a>
@@ -80,8 +107,6 @@
 			<ul>
 				<li><a href="explore.jsp"><span
 						class="navIcon icon-compass"></span><span class="navLabel">Explore</span></a></li>
-				<li><a href="single.jsp"><span class="navIcon icon-home"></span><span
-						class="navLabel">Single</span></a></li>
 				<li><a href="add.jsp"><span class="navIcon icon-plus"></span><span
 						class="navLabel">New</span></a></li>
 				<li class="hasSub"><a href="#"><span
@@ -92,7 +117,6 @@
 						<li><a href="index.jsp">Homepage</a></li>
 						<li><a href="explore.jsp">Explore</a></li>
 						<li><a href="add.jsp">Add</a></li>
-						<li><a href="single.jsp">Single</a></li>
 					</ul></li>
 			</ul>
 		</nav>
@@ -102,16 +126,6 @@
 
 	<!-- Content -->
 
-	<%
-		List<MarkersCategory> categories = (List<MarkersCategory>) 
-		session.getAttribute("categories");
-						
-		Marker marker = (Marker) session.getAttribute("marker");
-
-		MarkersCategory category = (MarkersCategory) session.getAttribute("category");
-
-		int categoryId = category.getId();
-	%>
 
 	<div id="wrapper">
 		<div id="mapView" class="mob-min">
@@ -120,8 +134,9 @@
 			</div>
 		</div>
 		<div id="content" class="mob-max">
-
-
+			<%
+				if (session.getAttribute("loggedIn") != null) {
+			%>
 			<div class="filter">
 
 				<h1 class="osLight">Edit markers and categories</h1>
@@ -132,12 +147,12 @@
 						<h1>Update Category</h1>
 					</div>
 					<%
-						if(category != null){
+						if (category != null) {
 					%>
 					<form role="form" action="update" method="post"
 						onsubmit="return validateCategoryForm()" name="categoryForm">
-						<input type="hidden" name="requestType" value="addCategory" />
-						<input type="hidden" value="<%=category.getId() %>" name="categoryId" />
+						<input type="hidden" name="requestType" value="addCategory" /> <input
+							type="hidden" value="<%=category.getId()%>" name="categoryId" />
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 								<div class="form-group">
@@ -169,8 +184,8 @@
 					</div>
 					<form role="form" action="update" method="post"
 						onsubmit="return validateMarkerForm()" name="markerForm">
-						<input type="hidden" name="requestType" value="addMarker" />
-						<input type="hidden" value="<%=marker.getId() %>" name="markerId" />
+						<input type="hidden" name="requestType" value="addMarker" /> <input
+							type="hidden" value="<%=marker.getId()%>" name="markerId" />
 
 						<div class="row">
 
@@ -187,29 +202,27 @@
 									<div class="clearfix"></div>
 									<a href="#" data-toggle="dropdown"
 										class="btn btn-default dropdown-toggle"> <span
-										class="dropdown-label"><%= category.getName() %></span>&nbsp;&nbsp;&nbsp;<span
+										class="dropdown-label"><%=category.getName()%></span>&nbsp;&nbsp;&nbsp;<span
 										class="caret"></span>
 									</a>
 									<ul class="dropdown-menu dropdown-select">
 										<%
-										if(categories != null) {
-											session.removeAttribute("categories");
-
-											for (MarkersCategory cat : categories) {
-											if(cat.getId() != categoryId) 
-																			{
+											if (categories != null) {
+														for (MarkersCategory cat : categories) {
+															if (cat.getId() != categoryId) {
 										%>
 										<li><input type="radio" name="ptype"
 											value="<%=cat.getId()%>"><a href="#"><%=cat.getName()%></a></li>
 										<%
 											} else {
 										%>
-										<li class="active"><input type="radio" name="ptype" checked="checked"
-											value="<%=cat.getId()%>"><a href="#"><%=cat.getName()%></a></li>
+										<li class="active"><input type="radio" name="ptype"
+											checked="checked" value="<%=cat.getId()%>"><a
+											href="#"><%=cat.getName()%></a></li>
 										<%
 											}
-																		}
-																	}
+														}
+													}
 										%>
 									</ul>
 								</div>
@@ -241,7 +254,8 @@
 								<div class="input-group">
 									<label>Put Marker</label> <input type="button"
 										value="Put marker" class="btn btn-green btn-lg"
-										style="height: 37px;" id="putMarkerBtn" onclick="putNewMarker()">
+										style="height: 37px;" id="putMarkerBtn"
+										onclick="putNewMarker()">
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
@@ -313,6 +327,11 @@
 					%>
 				</div>
 			</div>
+
+
+			<%
+				}
+			%>
 
 
 			<%

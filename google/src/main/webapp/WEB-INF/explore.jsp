@@ -37,6 +37,10 @@
 			<span class="searchIcon icon-magnifier"></span> <input type="text"
 				placeholder="Search for places...">
 		</div>
+		<% 
+if(session.getAttribute("loggedIn") != null)
+            {
+            %>
 		<div class="headerUserWraper">
 			<a href="#" class="userHandler dropdown-toggle"
 				data-toggle="dropdown"><span class="icon-user"></span><span
@@ -63,6 +67,7 @@
 				</ul>
 			</div>
 		</div>
+		<%} %>
 
 
 		<a href="#" class="mapHandler"><span class="icon-map"></span></a>
@@ -81,8 +86,6 @@
 			<ul>
 				<li><a href="explore.jsp"><span
 						class="navIcon icon-compass"></span><span class="navLabel">Explore</span></a></li>
-				<li><a href="single.jsp"><span class="navIcon icon-home"></span><span
-						class="navLabel">Single</span></a></li>
 				<li><a href="add.jsp"><span class="navIcon icon-plus"></span><span
 						class="navLabel">New</span></a></li>
 				<li class="hasSub"><a href="#"><span
@@ -93,7 +96,6 @@
 						<li><a href="index.jsp">Homepage</a></li>
 						<li><a href="explore.jsp">Explore</a></li>
 						<li><a href="add.jsp">Add</a></li>
-						<li><a href="single.jsp">Single</a></li>
 					</ul></li>
 			</ul>
 		</nav>

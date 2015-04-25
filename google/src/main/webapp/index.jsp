@@ -31,8 +31,18 @@
                 <a href="#" class="home-navHandler visible-xs"><span class="fa fa-bars"></span></a>
                 <div class="home-nav">
                     <ul>
-                        
-                        <li><a href="#" data-toggle="modal" data-target="#signin">Sign In</a></li>
+                    		 <%
+        if(session.getAttribute("loggedIn") == null)
+            {
+            %>
+                        <li style="padding-top:0px;"><a href="signin.jsp" class="btn btn-green">Sign In</a></li>
+        <%                
+            } else {
+        %>
+        				<li style="padding-top:0px;"><a href="logout" class="btn btn-green">Log Out</a></li>
+        <%                
+            }
+        %>
                         <li><a href="explore.jsp" class="btn btn-green">List a Property</a></li>
                     </ul>
                 </div>

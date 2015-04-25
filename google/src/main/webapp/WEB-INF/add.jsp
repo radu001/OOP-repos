@@ -3,6 +3,12 @@
 <%@ page
 	import="java.util.List, com.google.entity.MarkersCategory, com.google.dao.impl.MarkersCategoryDaoImpl"%>
 
+<%
+
+if(session.getAttribute("loggedIn") == null) {
+response.sendRedirect("signin.jsp");
+}
+%>
 
 <head>
 <meta charset="utf-8">
@@ -39,11 +45,16 @@
 			<span class="searchIcon icon-magnifier"></span> <input type="text"
 				placeholder="Search for places...">
 		</div>
+		<% 
+if(session.getAttribute("loggedIn") != null)
+            {
+            %>
 		<div class="headerUserWraper">
 			<a href="#" class="userHandler dropdown-toggle"
-				data-toggle="dropdown"><span class="icon-user"></span></a> <a
-				href="#" class="headerUser dropdown-toggle" data-toggle="dropdown">
-				<img class="avatar headerAvatar pull-left" src="images/avatar-1.png"
+				data-toggle="dropdown"><span class="icon-user"></span><span
+				class="counter">5</span></a> <a href="#"
+				class="headerUser dropdown-toggle" data-toggle="dropdown"> <img
+				class="avatar headerAvatar pull-left" src="images/avatar-1.png"
 				alt="avatar">
 				<div class="userTop pull-left">
 					<span class="headerUserName">Admin</span> <span
@@ -64,6 +75,7 @@
 				</ul>
 			</div>
 		</div>
+		<%} %>
 
 
 		<a href="#" class="mapHandler"><span class="icon-map"></span></a>
@@ -82,8 +94,6 @@
 			<ul>
 				<li><a href="explore.jsp"><span
 						class="navIcon icon-compass"></span><span class="navLabel">Explore</span></a></li>
-				<li><a href="single.jsp"><span class="navIcon icon-home"></span><span
-						class="navLabel">Single</span></a></li>
 				<li><a href="add.jsp"><span class="navIcon icon-plus"></span><span
 						class="navLabel">New</span></a></li>
 
@@ -96,7 +106,6 @@
 						<li><a href="index.jsp">Homepage</a></li>
 						<li><a href="explore.jsp">Explore</a></li>
 						<li><a href="add.jsp">Add</a></li>
-						<li><a href="single.jsp">Single</a></li>
 					</ul></li>
 			</ul>
 		</nav>
