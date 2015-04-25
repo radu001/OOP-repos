@@ -7,6 +7,103 @@ var newMarker = null;
 var markers = [];
 var markerRoute = null;
 
+function startRoute() {
+	//document.getElementById("startRouteBtn").disabled = true; 
+	clearRoute();
+	
+	map.setOptions({
+		draggableCursor: 'crosshair'
+		}); 
+	
+	var polyOptions = {
+		    strokeColor: '#000000',
+		    strokeOpacity: 1.0,
+		    strokeWeight: 3
+		  };
+		  poly = new google.maps.Polyline(polyOptions);
+		  poly.setMap(map);
+
+		  path = poly.getPath();
+    	  path.push(newMarker.getPosition());
+    	  
+    	  
+    	  $('#routeString').val('[' + path.getArray().toString().replace(/\(/g,"[").replace(/\)/g,"]") + ']');
+    	  //$('#routeString').val(google.maps.geometry.encoding.encodePath(path));
+    	 
+		  // Add a listener for the click event
+		  clickListener = google.maps.event.addListener(map, 'click', addLatLng);
+}
+
+function addLatLng(event) {
+	  path = poly.getPath();
+	  path.push(event.latLng);
+	  $('#routeString').val('[' + path.getArray().toString().replace(/\(/g,"[").replace(/\)/g,"]") + ']');
+	  //$('#routeString').val(google.maps.geometry.encoding.encodePath(path));
+	}
+
+function autocomplete(latlng) {
+	 geocoder = new google.maps.Geocoder();
+	 geocoder.geocode({'latLng': latlng}, function(results, status) {
+	      if (status == google.maps.GeocoderStatus.OK) {
+	        if (results[0]) {
+	          console.log(results);
+	          document.getElementById("address").value = results[0].formatted_address;
+	        }
+	      } else {
+	        alert("Geocoder failed due to: " + status);
+	      }
+	    });
+}
+
+
+function putNewMarker() {
+	newMarker.setMap(null);
+	clearRoute();
+    	clickListener = google.maps.event.addListener(map, 'click',function(event) {
+    		   placeMarker(event.latLng);
+
+    });
+    	 //document.getElementById("putMarkerBtn").disabled = true; 
+	
+}
+
+
+function placeMarker(location) {
+	  newMarker = new google.maps.Marker({
+	        position: location,
+	        map: map,
+	        icon: new google.maps.MarkerImage( 
+	            'images/marker-new.png',
+	            null,
+	            null,
+	            null,
+	            new google.maps.Size(36, 36)
+	        ),
+	        draggable: true,
+	        animation: google.maps.Animation.DROP,
+	    });
+	 
+	  $('#latitude').val(location.lat());
+    $('#longitude').val(location.lng());
+	  google.maps.event.removeListener(clickListener);
+	  
+    google.maps.event.addListener(newMarker,'dragend',function(event) {
+
+    	autocomplete(newMarker.position);
+    });
+    autocomplete(newMarker.position);
+	
+	  
+	    google.maps.event.addListener(newMarker, "mouseup", function(event) {
+	        $('#latitude').val(this.position.lat());
+	        $('#longitude').val(this.position.lng());
+	    });
+	    
+  	//document.getElementById("startRouteBtn").disabled = false; 
+	   
+}
+
+
 function validateCategoryForm() {
 	var str = "";
     var title = document.forms["categoryForm"]["title"].value;
@@ -80,6 +177,7 @@ function validateMarkerForm() {
 function clearRoute() {
 	if(path != null)
 		path.clear();
+	 $('#routeString').val('');
 }
 
 function setRoute(marker) {
@@ -190,6 +288,7 @@ function putMarker(marker) {
 								+ '<div class="propTitle">'
 								+ marker.Name
 								+ '</div>'
+								+ '<div class="propAddress">' + marker.Address + '</div>' +
 								+ marker.Description.substring(0, 80)
 								+ '</div>'
 								+

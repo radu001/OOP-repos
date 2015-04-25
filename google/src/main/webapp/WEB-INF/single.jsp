@@ -241,7 +241,7 @@
 								<div class="input-group">
 									<label>Put Marker</label> <input type="button"
 										value="Put marker" class="btn btn-green btn-lg"
-										style="height: 37px;" id="putMarkerBtn" onclick="putMarker()">
+										style="height: 37px;" id="putMarkerBtn" onclick="putNewMarker()">
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">

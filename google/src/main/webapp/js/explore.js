@@ -136,6 +136,7 @@ function putMarkers(markersArray) {
 								+ '<div class="propTitle">'
 								+ marker.Name
 								+ '</div>'
+								+ '<div class="propAddress">' + marker.Address + '</div>' +
 								+ marker.Description.substring(0, 80)
 								+ '</div>'
 								+
@@ -149,8 +150,10 @@ function putMarkers(markersArray) {
 						google.maps.event.addListener(markerVar, 'dblclick',
 								(function(marker, i) {
 									return function() {
+										clearRoute();
 										infobox.setContent(infoboxContent);
 										infobox.open(map, marker);
+										
 									}
 								})(markerVar, i));
 
