@@ -30,7 +30,6 @@ public class ExploreServlet extends HttpServlet {
 		}
 
 		session.setAttribute("categories", categories);
-		System.out.println("hello");
 		req.getRequestDispatcher("/WEB-INF/explore.jsp").forward(req, resp);
 	}
 

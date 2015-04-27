@@ -133,6 +133,8 @@ if(session.getAttribute("loggedIn") != null)
 						System.out.println(strExpired);
 					if (strExpired.equals("succes")){
 						%><font color="green" size="5"> * Data successfully inserted!</font> <BR> <BR><%
+					} else {
+						%><font color="red" size="5"> * Error... data not inserted!</font> <BR> <BR><%
 					}
 					}  
 					

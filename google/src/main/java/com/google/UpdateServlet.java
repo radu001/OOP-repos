@@ -45,7 +45,6 @@ public class UpdateServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			// session.setAttribute("result","succes");
 			resp.sendRedirect("explore.jsp");
 			break;
 
@@ -75,16 +74,6 @@ public class UpdateServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-			/*
-			 * System.out.println(title); System.out.println(description);
-			 * System.out.println(category); System.out.println(latitude);
-			 * System.out.println(longitude); System.out.println(route);
-			 * System.out.println(site); System.out.println(iconUrl);
-			 * System.out.println(imageUrl);
-			 */
-
-			// session.setAttribute("result","succes");
 
 			resp.sendRedirect("explore.jsp");
 			break;

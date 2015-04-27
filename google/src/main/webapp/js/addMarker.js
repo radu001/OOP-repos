@@ -161,7 +161,6 @@
         	  
         	  
         	  $('#routeString').val('[' + path.getArray().toString().replace(/\(/g,"[").replace(/\)/g,"]") + ']');
-        	  //$('#routeString').val(google.maps.geometry.encoding.encodePath(path));
         	 
     		  // Add a listener for the click event
     		  clickListener = google.maps.event.addListener(map, 'click', addLatLng);
@@ -171,7 +170,6 @@
     	  path = poly.getPath();
     	  path.push(event.latLng);
     	  $('#routeString').val('[' + path.getArray().toString().replace(/\(/g,"[").replace(/\)/g,"]") + ']');
-    	  //$('#routeString').val(google.maps.geometry.encoding.encodePath(path));
     	}
     
     

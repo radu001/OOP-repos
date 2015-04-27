@@ -56,7 +56,7 @@ public class SingleServlet extends HttpServlet {
 		session.setAttribute("category", category);
 		session.setAttribute("idMarker", id);
 		session.setAttribute("marker", marker);
-		// System.out.println("hello");
+
 		req.getRequestDispatcher("/WEB-INF/single.jsp").forward(req, resp);
 	}
 

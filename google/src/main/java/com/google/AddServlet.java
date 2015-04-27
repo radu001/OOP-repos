@@ -32,6 +32,7 @@ public class AddServlet extends HttpServlet {
 		HttpSession session=req.getSession();  
 		
 		switch(requestType) {
+		
 		case "addCategory":
 		
 		title = req.getParameter("title");
@@ -51,6 +52,9 @@ public class AddServlet extends HttpServlet {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				session.setAttribute("result","error");
+				resp.sendRedirect("add.jsp");
+				return;
 			}
 			
 			session.setAttribute("result","succes");
@@ -80,20 +84,10 @@ public class AddServlet extends HttpServlet {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				session.setAttribute("result","error");
+				resp.sendRedirect("add.jsp");
+				return;
 			}
-			
-			/*
-			System.out.println(title);
-			System.out.println(description);
-			System.out.println(category);
-			System.out.println(latitude);
-			System.out.println(longitude);
-			System.out.println(route);
-			System.out.println(site);
-			System.out.println(iconUrl);
-			System.out.println(imageUrl);
-			*/
-			
 			
 			session.setAttribute("result","succes");
 			resp.sendRedirect("add.jsp");
@@ -116,7 +110,6 @@ public class AddServlet extends HttpServlet {
 		}
 		
 		session.setAttribute("categories", categories);
-		System.out.println("hello");
 		req.getRequestDispatcher("/WEB-INF/add.jsp").forward(req, resp);
 	}
 	
