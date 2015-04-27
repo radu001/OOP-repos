@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import com.google.dao.AdminDao;
 import com.google.dao.util.JdbcConnectionPool;
 import com.google.entity.Admin;
-import com.google.exception.DaoException;
 import com.mysql.jdbc.Connection;
 
 public class AdminDaoImpl implements AdminDao {
@@ -18,7 +17,7 @@ public class AdminDaoImpl implements AdminDao {
 		connectionPool = new JdbcConnectionPool();
 	}
 
-	public void updatePassword(String password) throws DaoException {
+	public void updatePassword(String password) {
 		Connection connection = connectionPool.getConnectionFromPool();
 		PreparedStatement preparedStatement = null;
 		try {
@@ -32,18 +31,19 @@ public class AdminDaoImpl implements AdminDao {
 			System.out
 					.print(" SQLException in method AdminDaoImpl.updatePassword : "
 							+ e.getMessage());
-			throw new DaoException(e);
+
 		} catch (Exception e) {
-			System.out.print(" Exception  in method AdminDaoImpl.updatePassword  "
-					+ e.getMessage());
-			throw new DaoException(e);
+			System.out
+					.print(" Exception  in method AdminDaoImpl.updatePassword  "
+							+ e.getMessage());
+
 		} finally {
 			connectionPool.returnConnectionToPool(connection);
 		}
 
 	}
 
-	public void updateEmail(String email) throws DaoException {
+	public void updateEmail(String email) {
 		Connection connection = connectionPool.getConnectionFromPool();
 		PreparedStatement preparedStatement = null;
 		try {
@@ -57,20 +57,19 @@ public class AdminDaoImpl implements AdminDao {
 			System.out
 					.print(" SQLException in method AdminDaoImpl.updateEmail : "
 							+ e.getMessage());
-			throw new DaoException(e);
+
 		} catch (Exception e) {
 			System.out.print(" Exception  in method AdminDaoImpl.updateEmail "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} finally {
 			connectionPool.returnConnectionToPool(connection);
 		}
 
 	}
 
-
 	@Override
-	public Admin getAdmin() throws DaoException {
+	public Admin getAdmin() {
 		Connection connection = connectionPool.getConnectionFromPool();
 		String password = null;
 		String email = null;
@@ -91,11 +90,12 @@ public class AdminDaoImpl implements AdminDao {
 			System.out
 					.print(" SQLException in method AdminDaoImpl.selectPassword  : "
 							+ e.getMessage());
-			throw new DaoException(e);
+
 		} catch (Exception e) {
-			System.out.print(" Exception  in method AdminDaoImpl.selectPassword  "
-					+ e.getMessage());
-			throw new DaoException(e);
+			System.out
+					.print(" Exception  in method AdminDaoImpl.selectPassword  "
+							+ e.getMessage());
+
 		} finally {
 			connectionPool.returnConnectionToPool(connection);
 		}

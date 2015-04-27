@@ -10,8 +10,6 @@ import java.util.List;
 import com.google.dao.GenericDao;
 import com.google.dao.util.JdbcConnectionPool;
 import com.google.entity.Marker;
-import com.google.entity.Route;
-import com.google.exception.DaoException;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
@@ -23,7 +21,7 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 		connectionPool = new JdbcConnectionPool();
 	}
 
-	public void insert(Marker object) throws DaoException {
+	public void insert(Marker object) {
 		Connection connection = connectionPool.getConnectionFromPool();
 		try {
 
@@ -47,17 +45,17 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 		} catch (SQLException e) {
 			System.out.print(" SQLException in method MarkerDaoImpl.insert : "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.insert "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} finally {
 			connectionPool.returnConnectionToPool(connection);
 		}
 	}
 
-	public Marker getByPK(int key) throws DaoException {
+	public Marker getByPK(int key) {
 		Connection connection = connectionPool.getConnectionFromPool();
 		Marker marker = null;
 		try {
@@ -80,18 +78,18 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 		} catch (SQLException e) {
 			System.out.print(" SQLException in method MarkerDaoImpl.getByPK : "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.getByPK "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} finally {
 			connectionPool.returnConnectionToPool(connection);
 		}
 		return marker;
 	}
 
-	public void update(Marker object) throws DaoException {
+	public void update(Marker object) {
 		Connection connection = connectionPool.getConnectionFromPool();
 		PreparedStatement preparedStatement = null;
 		try {
@@ -113,18 +111,18 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 		} catch (SQLException e) {
 			System.out.print(" SQLException in method MarkerDaoImpl.update : "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.update "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} finally {
 			connectionPool.returnConnectionToPool(connection);
 		}
 
 	}
 
-	public void delete(Marker object) throws DaoException {
+	public void delete(Marker object) {
 		Connection connection = connectionPool.getConnectionFromPool();
 		try {
 			PreparedStatement preparedStatement = null;
@@ -135,18 +133,18 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 		} catch (SQLException e) {
 			System.out.print(" SQLException in method MarkerDaoImpl.delete : "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.delete "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} finally {
 			connectionPool.returnConnectionToPool(connection);
 		}
 
 	}
 
-	public List<Marker> getAll() throws DaoException {
+	public List<Marker> getAll() {
 		Connection connection = connectionPool.getConnectionFromPool();
 		Marker marker = null;
 		List<Marker> markers = new ArrayList<Marker>();
@@ -170,18 +168,18 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 		} catch (SQLException e) {
 			System.out.print(" SQLException in method MarkerDaoImpl.getAll : "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.getAll "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} finally {
 			connectionPool.returnConnectionToPool(connection);
 		}
 		return markers;
 	}
 
-	public Long getCount() throws DaoException {
+	public Long getCount() {
 		Connection connection = connectionPool.getConnectionFromPool();
 		Long count = null;
 		try {
@@ -199,18 +197,18 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 			System.out
 					.print(" SQLException in method MarkerDaoImpl.getCount : "
 							+ e.getMessage());
-			throw new DaoException(e);
+
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.getCount "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} finally {
 			connectionPool.returnConnectionToPool(connection);
 		}
 		return count;
 	}
 
-	public List<Marker> getByFK(int fk) throws DaoException {
+	public List<Marker> getByFK(int fk) {
 		Connection connection = connectionPool.getConnectionFromPool();
 		Marker marker = null;
 		List<Marker> markers = new ArrayList<Marker>();
@@ -235,11 +233,11 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 		} catch (SQLException e) {
 			System.out.print(" SQLException in method MarkerDaoImpl.getByFK : "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.getByFK "
 					+ e.getMessage());
-			throw new DaoException(e);
+
 		} finally {
 			connectionPool.returnConnectionToPool(connection);
 		}

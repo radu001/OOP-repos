@@ -3,26 +3,17 @@ package com.google.dao;
 import java.io.Serializable;
 import java.util.List;
 
-import com.google.exception.DaoException;
+public interface GenericDao<T, PK extends Serializable> {
 
-public interface GenericDao<T, PK extends Serializable>{
+	public void insert(T object);
 
+	public T getByPK(int key);
 
-    /** Создает новую запись, соответствующую объекту object */
-    public void insert(T object)  throws DaoException;
+	public void update(T object);
 
-    /** Возвращает объект соответствующий записи с первичным ключом key или null */
-    public T getByPK(int key) throws DaoException;
+	public void delete(T object);
 
-    /** Сохраняет состояние объекта group в базе данных */
-    public void update(T object) throws DaoException;
+	public List<T> getAll();
 
-    /** Удаляет запись об объекте из базы данных */
-    public void delete(T object) throws DaoException;
-
-    /** Возвращает список объектов соответствующих всем записям в базе данных */
-    public List<T> getAll() throws DaoException;
-    
-    /** Возвращает число записей*/
-    Long getCount() throws DaoException;
+	Long getCount();
 }

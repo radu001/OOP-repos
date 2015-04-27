@@ -17,14 +17,13 @@ import org.json.JSONObject;
 
 import com.google.dao.impl.MarkerDaoImpl;
 import com.google.entity.Marker;
-import com.google.exception.DaoException;
 
 public class GetMarkersServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		HttpSession session=req.getSession(); 
+		HttpSession session = req.getSession();
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				req.getInputStream()));
 		String json = "";
@@ -56,14 +55,15 @@ public class GetMarkersServlet extends HttpServlet {
 			JSONObject markerJson;
 
 			try {
-				String categoryId = arr.getJSONObject(0).getString("categoryId");
+				String categoryId = arr.getJSONObject(0)
+						.getString("categoryId");
 				int categoryIdInt = Integer.parseInt(categoryId);
 				MarkerDaoImpl markerDao = new MarkerDaoImpl();
 				List<Marker> markers = null;
-				if(categoryIdInt != -1)
-				markers = markerDao.getByFK(categoryIdInt);
-				else markers = markerDao.getAll();
-				
+				if (categoryIdInt != -1)
+					markers = markerDao.getByFK(categoryIdInt);
+				else
+					markers = markerDao.getAll();
 
 				for (Marker marker : markers) {
 					markerJson = new JSONObject();
@@ -91,7 +91,7 @@ public class GetMarkersServlet extends HttpServlet {
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (DaoException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

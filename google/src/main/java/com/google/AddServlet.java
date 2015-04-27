@@ -13,7 +13,6 @@ import com.google.dao.impl.MarkerDaoImpl;
 import com.google.dao.impl.MarkersCategoryDaoImpl;
 import com.google.entity.Marker;
 import com.google.entity.MarkersCategory;
-import com.google.exception.DaoException;
 
 public class AddServlet extends HttpServlet {
 
@@ -49,7 +48,7 @@ public class AddServlet extends HttpServlet {
 			try {
 				categoryDao.insert(categoryT);
 				System.out.println("insert succes");
-			} catch (DaoException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -78,7 +77,7 @@ public class AddServlet extends HttpServlet {
 
 			try {
 				markerDao.insert(m);
-			} catch (DaoException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -111,7 +110,7 @@ public class AddServlet extends HttpServlet {
 		
 		try {
 			categories = categoryDao.getAll();
-		} catch (DaoException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
