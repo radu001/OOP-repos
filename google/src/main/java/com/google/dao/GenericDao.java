@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface GenericDao<T, PK extends Serializable> {
 
-	public void insert(T object);
+	public int insert(T object);
 
 	public T getByPK(int key);
 

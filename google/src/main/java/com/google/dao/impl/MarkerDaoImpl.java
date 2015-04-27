@@ -21,7 +21,8 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 		connectionPool = new JdbcConnectionPool();
 	}
 
-	public void insert(Marker object) {
+	public int insert(Marker object) {
+		int result = 0;
 		Connection connection = connectionPool.getConnectionFromPool();
 		try {
 
@@ -41,7 +42,7 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 			preparedStatement.setString(9, object.getRouteStr());
 			preparedStatement.setFloat(10, object.getFk_category());
 
-			preparedStatement.executeUpdate();
+			result = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.print(" SQLException in method MarkerDaoImpl.insert : "
 					+ e.getMessage());
@@ -53,6 +54,7 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 		} finally {
 			connectionPool.returnConnectionToPool(connection);
 		}
+		return result;
 	}
 
 	public Marker getByPK(int key) {

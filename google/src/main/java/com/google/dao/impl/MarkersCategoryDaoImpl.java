@@ -22,7 +22,8 @@ public class MarkersCategoryDaoImpl implements
 		connectionPool = new JdbcConnectionPool();
 	}
 
-	public void insert(MarkersCategory object) {
+	public int insert(MarkersCategory object) {
+		int result = 0;
 		Connection connection = connectionPool.getConnectionFromPool();
 		try {
 
@@ -34,7 +35,7 @@ public class MarkersCategoryDaoImpl implements
 			preparedStatement.setString(2, object.getDescription());
 			preparedStatement.setByte(3, (byte) (object.isPublicMap() ? 1 : 0));
 
-			preparedStatement.executeUpdate();
+			result = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out
 					.print(" SQLException in method MarkersCategoryDaoImpl.insert : "
@@ -48,7 +49,9 @@ public class MarkersCategoryDaoImpl implements
 		} finally {
 
 			connectionPool.returnConnectionToPool(connection);
+			
 		}
+		return result;
 
 	}
 

@@ -45,19 +45,16 @@ public class AddServlet extends HttpServlet {
 		
 
 		MarkersCategory categoryT = new MarkersCategory(0, title, description, visibility);
-
 			try {
-				categoryDao.insert(categoryT);
-				System.out.println("insert succes");
+				if(categoryDao.insert(categoryT) != 0)
+				session.setAttribute("result","succes"); else 
+					session.setAttribute("result","insucces");
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				session.setAttribute("result","error");
-				resp.sendRedirect("add.jsp");
-				return;
 			}
 			
-			session.setAttribute("result","succes");
 			resp.sendRedirect("add.jsp");
 			break;
 			
@@ -78,18 +75,19 @@ public class AddServlet extends HttpServlet {
 			Marker m = new Marker(0, title,description,address, imageUrl, iconUrl, site,  Double.parseDouble(latitude), Double.parseDouble(longitude),
 					route,Integer.parseInt(category));
 			
+			
 
+			
 			try {
-				markerDao.insert(m);
+				if(markerDao.insert(m) != 0)
+				session.setAttribute("result","succes"); else 
+					session.setAttribute("result","insucces");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				session.setAttribute("result","error");
-				resp.sendRedirect("add.jsp");
-				return;
 			}
 			
-			session.setAttribute("result","succes");
+
 			resp.sendRedirect("add.jsp");
 			break;
 	}
