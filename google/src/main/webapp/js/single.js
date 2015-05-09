@@ -7,6 +7,14 @@ var newMarker = null;
 var markers = [];
 var markerRoute = null;
 
+function validateDelete() {
+	if (confirm('Are you sure you want to delete the marker from database?')) {
+	    return true;
+	} else {
+	    return false;
+	}
+}
+
 function startRoute() {
 	//document.getElementById("startRouteBtn").disabled = true; 
 	clearRoute();

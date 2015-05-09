@@ -27,7 +27,7 @@ public class UpdateServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 
 		switch (requestType) {
-		case "addCategory":
+		case "updateCategory":
 
 			title = req.getParameter("title");
 			description = req.getParameter("description");
@@ -48,7 +48,7 @@ public class UpdateServlet extends HttpServlet {
 			resp.sendRedirect("explore.jsp");
 			break;
 
-		case "addMarker":
+		case "updateMarker":
 
 			String id2 = req.getParameter("markerId");
 			int markerId = Integer.parseInt(id2);

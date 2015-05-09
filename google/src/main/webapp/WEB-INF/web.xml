@@ -39,6 +39,11 @@
         <servlet-name>LogOutServlet</servlet-name>
         <servlet-class>com.google.LogOutServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>DeleteServlet</servlet-name>
+        <servlet-class>com.google.DeleteServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>AddServlet</servlet-name>
@@ -73,5 +78,10 @@
     <servlet-mapping>
         <servlet-name>LogOutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>DeleteServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
     </servlet-mapping>
 </web-app>

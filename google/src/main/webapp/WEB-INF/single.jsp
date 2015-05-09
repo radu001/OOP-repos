@@ -8,7 +8,7 @@
 	MarkersCategory category = null;
 
 	int categoryId = 0;
-	
+
 	List<MarkersCategory> categories = null;
 	if (session.getAttribute("loggedIn") != null) {
 
@@ -17,7 +17,7 @@
 		marker = (Marker) session.getAttribute("marker");
 		category = (MarkersCategory) session.getAttribute("category");
 		categoryId = category.getId();
-		
+
 	} else {
 		marker = (Marker) session.getAttribute("marker");
 	}
@@ -58,10 +58,9 @@
 			<span class="searchIcon icon-magnifier"></span> <input type="text"
 				placeholder="Search for places...">
 		</div>
-		                    		 <%
-        if(session.getAttribute("loggedIn") != null)
-            {
-            %>
+		<%
+			if (session.getAttribute("loggedIn") != null) {
+		%>
 		<div class="headerUserWraper">
 			<a href="#" class="userHandler dropdown-toggle"
 				data-toggle="dropdown"><span class="icon-user"></span><span
@@ -88,7 +87,9 @@
 				</ul>
 			</div>
 		</div>
-		<%} %>
+		<%
+			}
+		%>
 
 
 		<a href="#" class="mapHandler"><span class="icon-map"></span></a>
@@ -151,8 +152,9 @@
 					%>
 					<form role="form" action="update" method="post"
 						onsubmit="return validateCategoryForm()" name="categoryForm">
-						<input type="hidden" name="requestType" value="addCategory" /> <input
-							type="hidden" value="<%=category.getId()%>" name="categoryId" />
+						<input type="hidden" name="requestType" value="updateCategory" />
+						<input type="hidden" value="<%=category.getId()%>"
+							name="categoryId" />
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 								<div class="form-group">
@@ -166,9 +168,16 @@
 							<textarea class="form-control" rows="4" name="description"><%=category.getDescription()%></textarea>
 						</div>
 
-						<div class="form-group">
-							<input type="submit" class="btn btn-green btn-lg"
-								value="Update Category">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+								<div class="form-group">
+									<input type="submit" class="btn btn-green btn-lg"
+										value="Update Category">
+								</div>
+							</div>
+
+
 						</div>
 					</form>
 					<%
@@ -184,7 +193,7 @@
 					</div>
 					<form role="form" action="update" method="post"
 						onsubmit="return validateMarkerForm()" name="markerForm">
-						<input type="hidden" name="requestType" value="addMarker" /> <input
+						<input type="hidden" name="requestType" value="updateMarker" /> <input
 							type="hidden" value="<%=marker.getId()%>" name="markerId" />
 
 						<div class="row">
@@ -315,12 +324,22 @@
 						</div>
 
 
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+								<div class="form-group">
+									<input type="submit" class="btn btn-green btn-lg"
+										value=" Update Marker ">
+								</div>
+							</div>
 
-
-						<div class="form-group">
-							<input type="submit" class="btn btn-green btn-lg"
-								value=" Update Marker ">
+							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+								<div class="input-group">
+									<a class="btn btn-green btn-lg" href="delete?id=<%=marker.getId()%>&type=marker" 
+									onclick="return validateDelete();">Delete marker</a>
+								</div>
+							</div>
 						</div>
+
 					</form>
 					<%
 						}

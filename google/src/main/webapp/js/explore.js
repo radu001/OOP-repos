@@ -6,10 +6,27 @@ var path;
 var newMarker = null;
 var markers = [];
 var markerRoute = null;
+var categoryId;
 
 function clearRoute() {
 	if(path != null)
 		path.clear();
+}
+
+function validateDelete() {
+	if(categoryId == -1){
+		alert('Select the category');
+		return;
+	}
+	
+	if (confirm('Are you sure you want to delete the category from database?')) {
+		    var xmlHttp = new XMLHttpRequest();
+		    xmlHttp.open( "GET", "delete?id=" + categoryId + "&type=category", false );
+		    xmlHttp.send( null );
+		    return xmlHttp.responseText;
+	} else {
+	    return false;
+	}
 }
 
 function setRoute(marker) {
@@ -46,6 +63,7 @@ function focusMarker(markerId) {
 }
 
 function changeMap(element) {
+	categoryId = element;
 	console.log(element);
 	clearRoute();
 	var jsonReq = {
