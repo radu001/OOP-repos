@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.dao.GenericDao;
 import com.google.dao.impl.MarkersCategoryDaoImpl;
 import com.google.entity.MarkersCategory;
 
 public class ExploreServlet extends HttpServlet {
-	MarkersCategoryDaoImpl categoryDao = new MarkersCategoryDaoImpl();
+	GenericDao categoryDao = new MarkersCategoryDaoImpl();
 	List<MarkersCategory> categories = null;
 
 	@Override
@@ -31,6 +32,9 @@ public class ExploreServlet extends HttpServlet {
 
 		session.setAttribute("categories", categories);
 		req.getRequestDispatcher("/WEB-INF/explore.jsp").forward(req, resp);
+		
 	}
+	 
+	
 
 }

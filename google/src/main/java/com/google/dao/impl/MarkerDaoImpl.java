@@ -80,6 +80,7 @@ public class MarkerDaoImpl implements GenericDao<Marker, Serializable> {
 		} catch (SQLException e) {
 			System.out.print(" SQLException in method MarkerDaoImpl.getByPK : "
 					+ e.getMessage());
+			
 
 		} catch (Exception e) {
 			System.out.print(" Exception  in method MarkerDaoImpl.getByPK "
